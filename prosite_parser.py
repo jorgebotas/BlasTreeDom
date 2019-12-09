@@ -45,6 +45,7 @@ def doc_parser(accession):
 
 
 def main():
+    """ Finds ProSite domains in protein and stores pertaining information """
     fasta = open("data/PBP1_staphylococcus.fasta", "r")
     sequence = fasta.read()[64:].strip('\n')
     print(dat_parser(sequence))
