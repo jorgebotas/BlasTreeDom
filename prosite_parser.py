@@ -5,7 +5,7 @@ import re
 from Bio.ExPASy import Prosite,Prodoc
 
 
-def dat_parser(sequence, fields = ["name", "accession", "description", "pattern"]):
+def dat_parser(sequence, fields=["name", "accession", "description", "pattern"]):
     """ Finds domain hits from prosite.dat in input sequence """
     hits = []
     handle = open("prosite_files/prosite.dat", "r")
@@ -26,31 +26,40 @@ def dat_parser(sequence, fields = ["name", "accession", "description", "pattern"
         for pat, repl in pattern_replacements.items():
             pattern = pattern.replace(pat, repl)
         if pattern != "" and re.search(pattern, sequence):
-            hits.append([record.name, record.accession, record.description, pattern])
+            hits.append([record.name, record.accession, record.description, pattern]) # MODIFY
     handle.close()
     return hits
 
 
 def doc_parser(accession):
     """ Returns information on domain with input accession number """
+    doc_accession = "PDOC" + accession[2:] # accession in .doc and .dat differ!!!
     handle = open("prosite_files/prosite.doc")
     records = Prodoc.parse(handle)
     for record in records:
-        if accession == record.accession:
-            pass
-        # print('refs ' + str(record.prosite_refs))
-        # print(record.text)
-        # print(record.references)
-    return
+        if doc_accession == record.accession:
+            return record.text
+    return " ACCESSION ERROR "
 
+def store_domain_info(input_sequence, output_filename, fields=["name", "accession", "description", "pattern"]):
+    """  """
+    output_file = open(output_filename, 'w')
+    domains = dat_parser(input_sequence, fields=fields)
+    for domain in domains:
+        output_file.write(str(domain) + '\n')
+        text = doc_parser(domain[1])
+        output_file.write(text + '\n')
+
+    output_file.close()
 
 def main():
     """ Finds ProSite domains in protein and stores pertaining information """
     fasta = open("data/PBP1_staphylococcus.fasta", "r")
     sequence = fasta.read()[64:].strip('\n')
-    print(dat_parser(sequence))
+    # print(dat_parser(sequence))
+    store_domain_info(sequence, "domain_info.txt")
     # print(doc_parser('PS00001'))
-    re.findall(r"G[^EDRKHPFYW].{2}[STAGCN][^P]", sequence)
+    # re.findall(r"G[^EDRKHPFYW].{2}[STAGCN][^P]", sequence)
 
 
 

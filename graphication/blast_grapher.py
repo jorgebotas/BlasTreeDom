@@ -1,43 +1,34 @@
 #!/usr/bin/env python
 
-import os
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def calculate_pident_hue(input_df):
-    df = input_df
-    df['pident_hue'] = df.pident // 10
-    # pident_range = [15, 25, 50, 75, 90, 97, 100]
-    # pident_hue = 
-    # df['pident_hue'] = pident_hue
-    # for pident in df.pident:
-    #     for pid in pident_range:
-    #         if  pident >= pid:
-    #             pident_hue.append(pid)
-    #     print(df.loc[df.pident >= pident])
-    # df.loc[df.pident < pident_range[-1]]['pident_hue'] = 1 
-    return df
-
-def data_handler(input_file):
-
-    df = pd.read_csv(input_file, delimiter='\t')
+def blast_plot(blast_output):
+    """ Plot blast output for each of the queries provided in input file """
+    df = pd.read_csv(blast_output, delimiter='\t')
     df = df.sort_values(['qseqid', 'qcovs', 'pident', 'evalue'], ascending=[1, 0, 0, 0]).reset_index(drop=True)
+    df['pident greater than'] = round(df.pident / 10) * 10 # Use pindent to set color accordingly
     queries = pd.unique(df.qseqid)
     for query in queries:
         data = df[df.qseqid == query]
-        data = calculate_pident_hue(data)
-        query_plot = sns.barplot(data=data, x=np.full(len(data.sseqid), 744), y='sseqid' , color="grey")
-        coverage_plot = sns.barplot(data=data, x="qend", y="sseqid", hue='pident_hue', palette=sns.light_palette("green"), dodge=False) #dodge avoids hue shrinkage of width
-        n_term = sns.barplot(data=data, x="qstart", y="sseqid", color='grey')
+        # with plt.style.context('dark_background'):
+        sns.set(context='paper', font_scale=.8, font='times')
+        # plt.rc('ytick', labelsize=2)
+        fig, ax = plt.subplots(figsize=(5,5), clear=True)
+        # Plot totality of query (100% coverage)
+        sns.barplot(data=data, x=np.full(len(data.sseqid), 744), y='sseqid' , color="lightgrey") 
+        # Plot coverage 
+        sns.barplot(data=data, x="qend", y="sseqid", hue='pident greater than', palette=sns.light_palette("green"), dodge=False) #dodge avoids hue shrinkage of width
+        # Plot N-terminal if uncovered
+        sns.barplot(data=data, x="qstart", y="sseqid", color='lightgrey')
+        ax.set(xlabel='Blast overlap', ylabel='subject Accession Number', title='Blast output plot')
+        fig.tight_layout()
+
+        # fig.savefig("/Users/blackhoodie/Desktop/{}_blast.png".format(query))
+        plt.show()
 
 
-    # plt.savefig("/Users/blackhoodie/Desktop/hola.png")
-    plt.show()
-
-
-
-data_handler("blast_output.tsv")
+blast_plot("blast_output.tsv")

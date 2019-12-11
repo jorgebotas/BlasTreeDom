@@ -9,39 +9,42 @@ import pandas as pd
 from subprocess import call, PIPE, Popen
 
 
-def multifasta2database(multifasta, sequence_type, output_filename):
+def multifasta2database(multifasta, sequence_type, output_filename="database/subject", log='/dev/null'):
     """ Create database from multifasta using makeblastdb """
     # Create directory for database files if it does not already exist
-    database_path = os.path.abspath("database")
+    basename = os.path.basename(output_filename)
+    database_path = output_filename.replace(basename, "")
     try:
         os.mkdir(database_path)
     except:
         pass
-    call(['makeblastdb', '-in', multifasta, '-dbtype', sequence_type, '-logfile' , '/dev/null', '-out', 'database/' + str(output_filename)])
+    call(['makeblastdb', '-in', multifasta, '-dbtype', sequence_type, '-logfile' , log, '-out', output_filename])
     return 
 
 
 def save_multifasta(input_file = "blast_output.tsv", output_filename = "blast_output.fasta"):
     blast_output = pd.read_csv(input_file, delimiter='\t')
     output_file = open(output_filename, 'w')
-    for hit in blast_output.iterrows():
+    for dummy_idx, hit in blast_output.iterrows():
         output_file.write(">" + str(hit.sseqid) + "\n")
         output_file.write(str(hit.sseq) + "\n")
     output_file.close
+    return
 
 
 
-def blast_compute(query_fasta, database_path, sequence_type, e_value,  output_filename = "blast_output", fasta = False, headers = True):
+def blast_compute(query_fasta, database_path, sequence_type, e_value,  output_filename = "blast_output", log='/dev/null', fasta = False, headers = True):
     """ Perform blastp or blastn analysis for protein or nucleotide sequences respectively """
     if sequence_type == "prot":
         blast_type = 'blastp'
     elif sequence_type == "nucl":
         blast_type = 'blastn'
 
-    outfmt = '6 qseqid sseqid qcovs qstart qend pident evalue qseq sseq'
-    call([blast_type, '-query', query_fasta, '-db', database_path, '-evalue', e_value, '-out', output_filename + '.tsv', '-outfmt', outfmt])
+    outfmt = '6 qseqid sseqid qcovs qstart qend pident evalue sseq'
+    call([blast_type, '-query', query_fasta, '-db', database_path, '-evalue', e_value, '-out', output_filename + '.tsv', '-logfile', log, '-outfmt', outfmt])
 
     if headers:
+        # Include headers in output .tsv file
         first_line = outfmt[2:].replace(" ", "\t")
         blast = open(output_filename + '.tsv', 'r')
         blast_output = blast.read()

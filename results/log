@@ -1,0 +1,16 @@
+Started Wed Dec 11 23:14:49 2019
+muscle -maketree -in results/alignment.fasta -out results/NJ.tree -quiet -log results/log -cluster neighborjoining 
+Finished Wed Dec 11 23:14:49 2019
+
+
+Building a new DB, current time: 12/11/2019 23:17:13
+New DB name:   /Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/results/database/genBank
+New DB title:  data/PBP1.fasta
+Sequence type: Protein
+Deleted existing Protein BLAST database named /Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/results/database/genBank
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 54 sequences in 0.00178909 seconds.
+Started Wed Dec 11 23:17:15 2019
+muscle -maketree -in results/alignment.fasta -out results/NJ.tree -quiet -loga results/log -cluster neighborjoining 
+Finished Wed Dec 11 23:17:15 2019

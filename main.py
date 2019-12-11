@@ -30,44 +30,51 @@ def main():
     non_aligned.add_argument("-database", type=str)
     # Sequence type argument: either prot or nucl
     arg_parser.add_argument("-sequence_type", choices=['prot', 'nucl'])
+    arg_parser.add_argument("-results_dir", type=str)
     args = arg_parser.parse_args()
 
-    toBeContinued = False # Boolean to check whether previous step(s) have been computed
 
-    if args.multifasta: gb_multifasta_filename = os.path.basename(args.multifasta)
-    else: gb_multifasta_filename = "genBank_multifasta.fasta"
+    if args.results_dir: results = args.results_dir
+    else: results = "results/"
+ 
+    if args.multifasta: gb_multifasta_filename = args.multifasta
+    else: gb_multifasta_filename = results+"genBank_multifasta.fasta"
 
     if args.database: database = args.database
-    else: database = "database/genBank"
+    else: database = results+"database/genBank"
 
     if args.alignment: alignment = args.alignment
-    else: alignment = "muscle_input.fasta"
+    else: alignment = results+"alignment.fasta"
+
+    toBeContinued = False # Boolean to check whether previous step(s) have been computed
+    logfile = results + 'log'
+
 
 
     if args.genBank:
         # Generate combined multifasta with all parsed GenBank files
         print("Generating multifasta from GenBank file(s)")
-        gbp.gb_dir2multifasta(args.genBank, args.sequence_type, gb_multifasta_filename)
+        gbp.gb_dir2multifasta(genBank_dir=args.genBank, sequence_type=args.sequence_type, output_filename=gb_multifasta_filename)
         toBeContinued = True
     
     if args.multifasta or toBeContinued:
         # Generate database from created multifasta
         print("Generating database...")
-        bl.multifasta2database(gb_multifasta_filename, args.sequence_type, "genBank")
+        bl.multifasta2database(multifasta=gb_multifasta_filename, sequence_type=args.sequence_type, output_filename=database, log=logfile)
         toBeContinued = True
 
     if args.database or toBeContinued:
         # Perform blastp or blastn for protein or nucleotide sequences respectively
         print("Performing blast analysis...")
-        bl.blast_compute(args.query, database, args.sequence_type, E_VALUE, "blast_output.fasta")
+        bl.blast_compute(query_fasta=args.query, database_path=database, sequence_type=args.sequence_type, e_value=E_VALUE, output_filename=results+"blast_output", log=logfile, fasta=True)
         # Include query_fasta and perform multiple alignment using MUSCLE
         print("Performing multiple alignment...")
-        ms.multiple_alignment("blast_output.fasta", alignment, args.query)
+        ms.multiple_alignment(multifasta=results+"blast_output.fasta", query_fasta=args.query, output_filename=alignment, log=logfile)
 
     if args.alignment or toBeContinued:
         # Compute NJ tree using MUSCLE
         print("Computing NJ phylogenetic tree...")
-        ms.compute_NJtree(alignment)
+        ms.compute_NJtree(alignment=alignment, output_filename=results+"NJ.tree", log=logfile)
         print("Process COMPLETED")
 
     # Ring bell to notify completion
@@ -78,7 +85,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# fasta_merger output filename = genBank_multifasta.fasta
-# multifasta2db > multifasta from fasta merger, output filename = genBank dir basename
-# blast_compute output filename = str(blast_type) + "_output.fasta"
