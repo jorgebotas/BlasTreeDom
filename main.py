@@ -3,19 +3,24 @@
 import argparse
 import os
 import sys
+import time
 
 from subprocess import call, PIPE, Popen
 from Bio import SeqIO
 
-import genbank_parser as gbp
 import blast as bl
+import genbank_parser as gbp
+import graphication.blast_grapher as graph
 import muscle as ms
+import prosite_parser as proparse
 
 
 
 def main():
     # e-value threshold for blast 
     E_VALUE = "1e-03"
+
+    time0 = time.time()
 
     arg_parser = argparse.ArgumentParser()
     # Create mutually exclusive group of positional arguments
@@ -31,6 +36,7 @@ def main():
     # Sequence type argument: either prot or nucl
     arg_parser.add_argument("-sequence_type", choices=['prot', 'nucl'])
     arg_parser.add_argument("-results_dir", type=str)
+    arg_parser.add_argument("-graph", action='store_true')
     args = arg_parser.parse_args()
 
 
@@ -48,7 +54,7 @@ def main():
 
     toBeContinued = False # Boolean to check whether previous step(s) have been computed
     logfile = results + 'log'
-
+    blast_output = results + 'blast_output'
 
 
     if args.genBank:
@@ -66,19 +72,34 @@ def main():
     if args.database or toBeContinued:
         # Perform blastp or blastn for protein or nucleotide sequences respectively
         print("Performing blast analysis...")
-        bl.blast_compute(query_fasta=args.query, database_path=database, sequence_type=args.sequence_type, e_value=E_VALUE, output_filename=results+"blast_output", log=logfile, fasta=True)
+        bl.blast_compute(query_fasta=args.query, database_path=database, sequence_type=args.sequence_type, e_value=E_VALUE, output_filename=blast_output, log=logfile, fasta=True)
         # Include query_fasta and perform multiple alignment using MUSCLE
         print("Performing multiple alignment...")
-        ms.multiple_alignment(multifasta=results+"blast_output.fasta", query_fasta=args.query, output_filename=alignment, log=logfile)
+        ms.multiple_alignment(multifasta=blast_output+'.fasta', query_fasta=args.query, output_filename=alignment, log=logfile)
 
     if args.alignment or toBeContinued:
         # Compute NJ tree using MUSCLE
         print("Computing NJ phylogenetic tree...")
         ms.compute_NJtree(alignment=alignment, output_filename=results+"NJ.tree", log=logfile)
-        print("Process COMPLETED")
+
+    # MAP DOMAINS and store them
+    print("Extracting ProSite domains...")
+    domains_dir = results+'domains/'
+    if not os.path.isdir(domains_dir): os.mkdir(domains_dir)
+    proparse.extract_domains(input_fasta=blast_output+'.fasta', output_dir=domains_dir)
 
     # Ring bell to notify completion
+    print("Process COMPLETED")
+    print("Total: {} seconds".format(time.time() - time0)) ## CREATE FUNCTION IN SYSTEM MODULE
     call(['echo', '\007'])
+
+    if args.graph:
+        # Create graphs directory to store plots
+        graphs_dir = results+'graphs/'
+        if not os.path.isdir(graphs_dir): os.mkdir(graphs_dir)
+        graph.blast_plot(blast_output=blast_output+'.tsv', output_dir=graphs_dir, show=True)
+        # graph.domain_grapher.domain_plot(blast_output=blast_output+'.fasta', show=True)
+
 
     sys.exit()
 

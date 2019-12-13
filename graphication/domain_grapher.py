@@ -29,7 +29,7 @@ def domain_mapper(input_sequence):
     return domain_list
     
 
-def domain_plot(blast_output):
+def domain_plot(blast_output, show=False):
     """ Plot ProSite protein domains on blast hits from input file """
     df = pd.read_csv(blast_output, delimiter='\t')
     df = df.sort_values(['qseqid', 'qcovs', 'pident', 'evalue'], ascending=[1, 0, 0, 0]).reset_index(drop=True)
@@ -59,10 +59,11 @@ def domain_plot(blast_output):
         fig.tight_layout()
 
         # fig.savefig("/Users/blackhoodie/Desktop/{}_blast.png".format(query))
-        plt.show()
+        if show:
+            plt.show()
 
 
-domain_plot("blast_output.tsv")
+# domain_plot("blast_output.tsv")
 
 
 

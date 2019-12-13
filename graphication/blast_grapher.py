@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def blast_plot(blast_output):
+def blast_plot(blast_output, output_dir, show=False):
     """ Plot blast output for each of the queries provided in input file """
     df = pd.read_csv(blast_output, delimiter='\t')
     df = df.sort_values(['qseqid', 'qcovs', 'pident', 'evalue'], ascending=[1, 0, 0, 0]).reset_index(drop=True)
@@ -27,8 +27,9 @@ def blast_plot(blast_output):
         ax.set(xlabel='Blast overlap', ylabel='subject Accession Number', title='Blast output plot')
         fig.tight_layout()
 
-        # fig.savefig("/Users/blackhoodie/Desktop/{}_blast.png".format(query))
-        plt.show()
+        fig.savefig("{}{}_blast.png".format(output_dir, query))
+        if show:
+            plt.show()
 
 
-blast_plot("blast_output.tsv")
+# blast_plot("blast_output.tsv")
