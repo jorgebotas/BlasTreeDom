@@ -53,6 +53,7 @@ def store_domain_info(input_sequence, output_filename, fields=["name", "accessio
         output_file.write(text + '\n')
     output_file.close()
     return len(domains)
+    ## Create file containing start and end positions of domain in each of the sequences
 
 
 
@@ -69,9 +70,8 @@ def extract_domains(input_fasta, output_dir, summary=True):
                 total_domains += store_domain_info(input_sequence=lines[idx+1], output_filename=output_dir+lines[idx][1:].strip('\n'))
             else:
                 pass
-
     if summary:
-
+        
     # CREATE SUMMARY FILE
 
 
