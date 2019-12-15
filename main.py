@@ -5,6 +5,7 @@ import os
 import sys
 import time
 
+import datetime
 from subprocess import call, PIPE, Popen
 from Bio import SeqIO
 
@@ -82,7 +83,7 @@ def main():
         print("Computing NJ phylogenetic tree...")
         ms.compute_NJtree(alignment=alignment, output_filename=results+"NJ.tree", log=logfile)
 
-    # MAP DOMAINS and store them
+    # Map domains and store them
     print("Extracting ProSite domains...")
     domains_dir = results+'domains/'
     if not os.path.isdir(domains_dir): os.mkdir(domains_dir)
@@ -90,7 +91,7 @@ def main():
 
     # Ring bell to notify completion
     print("Process COMPLETED")
-    print("Total: {} seconds".format(time.time() - time0)) ## CREATE FUNCTION IN SYSTEM MODULE
+    print("Total time: {}".format(str(datetime.timedelta(seconds=(time.time() - time0))))) ## CREATE FUNCTION IN SYSTEM MODULE
     call(['echo', '\007'])
 
     if args.graph:
