@@ -287,3 +287,42 @@ Adding sequences from FASTA; added 54 sequences in 0.00180006 seconds.
 Started Thu Dec 12 22:47:36 2019
 muscle -maketree -in results/alignment.fasta -out results/NJ.tree -quiet -loga results/log -cluster neighborjoining 
 Finished Thu Dec 12 22:47:36 2019
+
+
+Building a new DB, current time: 12/22/2019 11:58:37
+New DB name:   /Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/results/database/genBank
+New DB title:  data/PBP1.fasta
+Sequence type: Protein
+Deleted existing Protein BLAST database named /Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/results/database/genBank
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 54 sequences in 0.00242496 seconds.
+Started Sun Dec 22 11:58:40 2019
+muscle -maketree -in results/alignment.fasta -out results/NJ.tree -quiet -loga results/log -cluster neighborjoining 
+Finished Sun Dec 22 11:58:40 2019
+
+
+Building a new DB, current time: 12/22/2019 17:35:00
+New DB name:   /Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/results/database/genBank
+New DB title:  data/PBP1.fasta
+Sequence type: Protein
+Deleted existing Protein BLAST database named /Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/results/database/genBank
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 54 sequences in 0.0021441 seconds.
+Started Sun Dec 22 17:35:02 2019
+muscle -maketree -in results/alignment.fasta -out results/NJ.tree -quiet -loga results/log -cluster neighborjoining 
+Finished Sun Dec 22 17:35:02 2019
+
+
+Building a new DB, current time: 12/22/2019 17:36:25
+New DB name:   /Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/results/database/genBank
+New DB title:  data/PBP1.fasta
+Sequence type: Protein
+Deleted existing Protein BLAST database named /Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/results/database/genBank
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 54 sequences in 0.00185704 seconds.
+Started Sun Dec 22 17:36:27 2019
+muscle -maketree -in results/alignment.fasta -out results/NJ.tree -quiet -loga results/log -cluster neighborjoining 
+Finished Sun Dec 22 17:36:27 2019

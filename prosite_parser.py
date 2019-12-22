@@ -70,7 +70,6 @@ def extract_domains(input_fasta, output_dir, summary=True):
                 total_domains += store_domain_info(input_sequence=lines[idx+1], output_filename=output_dir+lines[idx][1:].strip('\n'))
             else:
                 pass
-    if summary:
         
     # CREATE SUMMARY FILE
 
