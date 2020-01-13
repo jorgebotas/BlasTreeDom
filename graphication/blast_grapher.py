@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import os
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -15,21 +17,22 @@ def blast_plot(blast_output, output_dir, show=False):
     for query in queries:
         data = df[df.qseqid == query]
         # with plt.style.context('dark_background'):
-        sns.set(context='paper', font_scale=.8, font='times')
+        sns.set(context='paper', font_scale=.9, font='times')
         # plt.rc('ytick', labelsize=2)
-        fig, ax = plt.subplots(figsize=(5,5), clear=True)
+        fig, ax = plt.subplots(figsize=(8,8), clear=True)
         # Plot totality of query (100% coverage)
-        sns.barplot(data=data, x=np.full(len(data.sseqid), 744), y='sseqid' , color="lightgrey") 
+        sns.barplot(data=data, x=np.full(len(data.sseqid), 744), y='sseqid' , color="lightgrey") ############ GET QUERY LENGTH!!!!
         # Plot coverage 
         sns.barplot(data=data, x="qend", y="sseqid", hue='pident greater than', palette=sns.light_palette("green"), dodge=False) #dodge avoids hue shrinkage of width
         # Plot N-terminal if uncovered
         sns.barplot(data=data, x="qstart", y="sseqid", color='lightgrey')
         ax.set(xlabel='Blast overlap', ylabel='subject Accession Number', title='Blast output plot')
+        ax.legend(title='pident lower or equal to', loc='lower left', bbox_to_anchor=(1, 0))
         fig.tight_layout()
 
-        fig.savefig("{}{}_blast.png".format(output_dir, query))
+        graph_dir = output_dir.rstrip('/')+'/'+query+'/'
+        if not os.path.isdir(graph_dir): os.mkdir(graph_dir)
+        fig.savefig(graph_dir+'blast.png')
         if show:
             plt.show()
-
-
-# blast_plot("blast_output.tsv")
+        plt.close(fig)

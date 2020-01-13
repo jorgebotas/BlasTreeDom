@@ -15,7 +15,6 @@ def domain_mapper(input_sequence):
     """ Return dictionary mapping:
     Prosite protein domain match to start and end position in input sequence """
     domains = prop.dat_parser(input_sequence, fields = ["name", "accession", "description", "pattern"])
-    # print(len(domains))
     domain_map = {}
     domain_list = []
     midpoint_list = []
@@ -36,14 +35,14 @@ def domain_mapper(input_sequence):
 
 def domain_plot(blast_output, output_dir, show=False):
     """ Plot ProSite protein domains on blast hits from input file """
-    df = pd.read_csv(blast_output, delimiter='\t')
+    df = pd.read_csv(blast_output, delimiter='\t') # .set_index['sseqid']
     idx=0 #Index to extract subject sequences
     queries = pd.unique(df.qseqid)
     for query in queries:
         data = df[df.qseqid == query]
         for sseqid in data.sseqid:
             subject = data[data.sseqid == sseqid]
-            domains, midpoints = domain_mapper(subject.sseq[idx])
+            domains, midpoints = domain_mapper(subject.seq[idx])
             midpoints = [point + subject.qstart[idx] for point in midpoints]
             levels = np.tile(np.arange(-9, 9 , 2), int(np.ceil(len(midpoints)/9)))[:len(midpoints)]
 

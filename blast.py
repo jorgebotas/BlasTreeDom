@@ -8,17 +8,17 @@ import numpy as np
 import pandas as pd
 from subprocess import call, PIPE, Popen
 
+import file_handler as fh
+
 
 def multifasta2database(multifasta, sequence_type, output_filename="database/subject", log='/dev/null'):
     """ Create database from multifasta using makeblastdb """
     # Create directory for database files if it does not already exist
     basename = os.path.basename(output_filename)
     database_path = output_filename.replace(basename, "")
-    try:
-        os.mkdir(database_path)
-    except:
-        pass
-    call(['makeblastdb', '-in', multifasta, '-dbtype', sequence_type, '-logfile' , log, '-out', output_filename])
+    if not os.path.isdir(database_path): os.mkdir(database_path)
+
+    call(['makeblastdb', '-in', multifasta, '-dbtype', sequence_type,'-logfile' , log, '-out', output_filename]) # -parse_seqids could be added
     return 
 
 
@@ -32,17 +32,20 @@ def save_multifasta(input_file = "blast_output.tsv", output_filename = "blast_ou
     return
 
 
-
-def blast_compute(query_fasta, database_path, sequence_type, e_value,  output_filename = "blast_output", log='/dev/null', fasta = False, headers = True):
+def blast_compute(query_fasta, database_path, sequence_type, cov,  pident, e_value,
+                  outfmt='6 qseqid sseqid qcovs qstart qend pident evalue', 
+                  output_filename = "blast_output", log='/dev/null', fasta = False, headers = True):
     """ Perform blastp or blastn analysis for protein or nucleotide sequences respectively """
     if sequence_type == "prot":
         blast_type = 'blastp'
     elif sequence_type == "nucl":
         blast_type = 'blastn'
 
-    outfmt = '6 qseqid sseqid qcovs qstart qend pident evalue sseq'
     call([blast_type, '-query', query_fasta, '-db', database_path, '-evalue', e_value, '-out', output_filename + '.tsv', '-logfile', log, '-outfmt', outfmt])
-
+    os.remove(log+'.perf') # log.perf file created when calling blast with -logfile argument
+    
+    # Filter out by coverage and identity percentage thresholds
+    ####################################################### MISSING ###############################################################################
     if headers:
         # Include headers in output .tsv file
         first_line = outfmt[2:].replace(" ", "\t")
@@ -58,6 +61,26 @@ def blast_compute(query_fasta, database_path, sequence_type, e_value,  output_fi
     return
 
 
+def retrieve_seqs(query_fasta, subject_multifasta, blast_output, output_dir, output_filename, remove_files=False):
+    """ Generate multifasta file with complete hit subject sequences for each query in blast_output file """ 
+    if not os.path.isdir(output_dir): os.mkdir(output_dir) # Create output directory
+    subject_tsv = os.path.basename(subject_multifasta).rsplit('.', 1)[0]+'.tsv'
+    query_tsv = os.path.basename(query_fasta).rsplit('.', 1)[0]+'.tsv'
+    fh.fasta2tsv(fasta_file=query_fasta, output_dir=output_dir, output_filename=query_tsv, fields=['qseqid', 'qseq', 'qseqlen'], seq_length=True)
+    fh.fasta2tsv(fasta_file=subject_multifasta, output_dir=output_dir, output_filename=subject_tsv, fields=['sseqid', 'sseq'])
+    blast = pd.read_csv(blast_output, delimiter='\t')
+    sseqs = pd.read_csv(output_dir.rstrip('/')+'/'+subject_tsv, delimiter='\t')
+    qseqs = pd.read_csv(output_dir.rstrip('/')+'/'+query_tsv, delimiter='\t')
+    # Merge dataframes by sseqid
+    blast_sseqs = pd.merge(left=blast, right=sseqs, on='sseqid')
+    merged = pd.merge(left=blast_sseqs, right=qseqs, on='qseqid')
+    merged.to_csv(output_dir.rstrip('/')+'/'+os.path.basename(output_filename), index=False, sep='\t')
+    if remove_files:
+        os.remove(output_dir.rstrip('/')+'/'+query_tsv)
+        os.remove(output_dir.rstrip('/')+'/'+subject_tsv)
+    return
+
+
 def main():
     # e-value threshold 
     E_VALUE = "1e-03" 
@@ -67,7 +90,9 @@ def main():
     exclusive = arg_parser.add_mutually_exclusive_group(required=True)
     exclusive.add_argument('-subject', type=str)
     exclusive.add_argument('-database', type=str)
-    arg_parser.add_argument("-sequence_type", choices=['prot', 'nucl'], required=True)
+    arg_parser.add_argument('-sequence_type', choices=['prot', 'nucl'], required=True)
+    arg_parser.add_argument('-pident')
+    arg_parser.add_argument('-cov')
     arg_parser.add_argument('-fasta', action='store_true')
     arg_parser.add_argument('-headers', action='store_true')
     args = arg_parser.parse_args()
@@ -79,8 +104,11 @@ def main():
         database = "database/" + str(subject_filename)
         multifasta2database(args.subject, args.sequence_type, subject_filename)
 
-    blast_compute(args.query, database, args.sequence_type, E_VALUE, fasta=args.fasta, headers=args.headers)
+    blast_compute(query_fasta=args.query, database_path=database, sequence_type=args.sequence_type,
+                  pident=args.pident, cov=args.cov, e_value=E_VALUE, fasta=args.fasta, headers=args.headers)
     
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
+
+# retrieve_sseq('/Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/data/subject.fasta', '/Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/results/blast_output.tsv', '/Users/blackhoodie/Desktop/', 'merged.tsv')

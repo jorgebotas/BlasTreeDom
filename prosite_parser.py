@@ -26,19 +26,18 @@ def dat_parser(sequence, fields=["name", "accession", "description", "pattern"])
             for pat, repl in pattern_replacements.items():
                 pattern = pattern.replace(pat, repl)
             if pattern != "" and re.search(pattern, sequence):
-                hits.append([record.name, record.accession, record.description, pattern]) # MODIFY
+                hits.append([record.name, record.pdoc, record.description, pattern]) # MODIFY
     return hits
 
 
 def doc_parser(accession):
     """ Returns information on domain with input accession number """
-    doc_accession = "PDOC" + accession[2:] # accession in .doc and .dat differ!!!
     with open("prosite_files/prosite.doc") as handle:
         records = Prodoc.parse(handle)
         for record in records:
-            if doc_accession == record.accession:
+            if accession == record.accession:
                 return record.text
-    return "####### ACCESSION ERROR #######\n Incorrect .dat .doc accession number translation\n"
+
 
 
 def store_domain_info(input_sequence, output_filename, fields=["name", "accession", "description", "pattern"]):
@@ -59,7 +58,7 @@ def store_domain_info(input_sequence, output_filename, fields=["name", "accessio
 
 def extract_domains(input_fasta, output_dir, summary=True):
     """ Given a FASTA file, extract domains of each sequence, store in different files under same directory.
-    Create summary file if requested"""
+        Create summary file if requested """
     total_domains = 0
     n_seq = 0
     with open(input_fasta, 'r') as input_file:
@@ -67,7 +66,7 @@ def extract_domains(input_fasta, output_dir, summary=True):
         for idx in range(len(lines)):
             if lines[idx][0] == '>':
                 n_seq += 1
-                total_domains += store_domain_info(input_sequence=lines[idx+1], output_filename=output_dir+lines[idx][1:].strip('\n'))
+                total_domains += store_domain_info(input_sequence=lines[idx+1].strip('\n'), output_filename=output_dir+lines[idx][1:].strip('\n'))
             else:
                 pass
         

@@ -6,7 +6,7 @@ import csv
 
 from Bio import SeqIO
 
-import system
+import file_handler as fh
 
 def genBank2multifasta(genBank, sequence_type, output_file = None):
     """ Parse GenBank file and extract all CDS.
@@ -49,7 +49,7 @@ def genBank2multifasta(genBank, sequence_type, output_file = None):
 
 def gb_dir2multifasta(genBank_dir, sequence_type, output_filename):
     """ Generate multifasta with all sequences in all genBank files in input directory """
-    genBank_list = system.list_files(genBank_dir)
+    genBank_list = os.listdir(genBank_dir)
     genBank_multifasta = ""
     for genBank_doc in genBank_list:
         genBank_multifasta += genBank2multifasta(genBank_doc, sequence_type)
@@ -77,8 +77,8 @@ def field_parser(input_gb, fields = ['locus_tag', 'gene', 'protein_id', 'EC_numb
                     for field in fields:
                         try:
                             value = str(feature.qualifiers[field])
-                            for ch in "[]'":
-                                value = value.strip(ch)
+                            for char in "[]'":
+                                value = value.strip(char)
                             data.append(value)
                         except:
                             data.append("NA")
