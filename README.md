@@ -1,9 +1,10 @@
 # **_BlastTreeDom_**
 
 #### Given query FASTA file(s) and genBank file(s):
-* Performs a Blast analysis : blastn or blastp
-* Compute Neighbour-Joining phylogenetic tree usign MUSCLE
-* Extract ProSite domains of each of the hit sequences from blast
+* Parse genBank file(s) CDS protein sequences
+* Perform blastp analysis
+* Compute Neighbour-Joining phylogenetic tree(s) using MUSCLE
+* Extract ProSite domains of each of the hit sequences from blastp
 
 #### Required packages
 * Bio
