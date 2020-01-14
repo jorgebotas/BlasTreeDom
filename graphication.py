@@ -11,6 +11,36 @@ import seaborn as sns
 import prosite_parser as prop
 
 
+def blast_plot(blast_output, output_dir, show=False):
+    """ Plot blast output for each of the queries provided in input file """
+    df = pd.read_csv(blast_output, delimiter='\t')
+    df = df.sort_values(['qseqid', 'qcovs', 'pident', 'evalue'], ascending=[1, 0, 0, 0]).reset_index(drop=True)
+    df['pident greater than'] = round(df.pident / 10) * 10 # Use pindent to set color accordingly
+    queries = pd.unique(df.qseqid)
+    for query in queries:
+        data = df[df.qseqid == query]
+        # with plt.style.context('dark_background'):
+        sns.set(context='paper', font_scale=.9, font='times')
+        # plt.rc('ytick', labelsize=2)
+        fig, ax = plt.subplots(figsize=(8,8), clear=True)
+        # Plot totality of query (100% coverage)
+        sns.barplot(data=data, x='qseqlen', y='sseqid' , color="lightgrey") ############ GET QUERY LENGTH!!!!
+        # Plot coverage 
+        sns.barplot(data=data, x="qend", y="sseqid", hue='pident greater than', palette=sns.light_palette("green"), dodge=False) #dodge avoids hue shrinkage of width
+        # Plot N-terminal if uncovered
+        sns.barplot(data=data, x="qstart", y="sseqid", color='lightgrey')
+        ax.set(xlabel='Blast overlap', ylabel='subject Accession Number', title=str(query)+' blast output plot')
+        ax.legend(title='pident lower or equal to', loc='lower left', bbox_to_anchor=(1, 0))
+        fig.tight_layout()
+
+        graph_dir = output_dir.rstrip('/')+'/'+query+'/'
+        if not os.path.isdir(graph_dir): os.mkdir(graph_dir)
+        fig.savefig(graph_dir+'blast.png')
+        if show:
+            plt.show()
+        plt.close(fig)
+
+
 def domain_mapper(input_sequence):
     """ Return dictionary mapping:
     Prosite protein domain match to start and end position in input sequence """
@@ -37,12 +67,12 @@ def domain_plot(blast_output, output_dir, show=False):
     """ Plot ProSite protein domains on blast hits from input file """
     df = pd.read_csv(blast_output, delimiter='\t') # .set_index['sseqid']
     idx=0 #Index to extract subject sequences
-    queries = pd.unique(df.qseqid)
-    for query in queries:
-        data = df[df.qseqid == query]
+    for qid in pd.unique(df.qseqid):
+        data = df[df.qseqid == qid]
         for sseqid in data.sseqid:
             subject = data[data.sseqid == sseqid]
-            domains, midpoints = domain_mapper(subject.seq[idx])
+            seq_len = len(subject.sseq[idx])
+            domains, midpoints = domain_mapper(subject.sseq[idx])
             midpoints = [point + subject.qstart[idx] for point in midpoints]
             levels = np.tile(np.arange(-9, 9 , 2), int(np.ceil(len(midpoints)/9)))[:len(midpoints)]
 
@@ -50,7 +80,7 @@ def domain_plot(blast_output, output_dir, show=False):
             fig, ax = plt.subplots(figsize=(15, 7), constrained_layout=True)
             ax.set(title="ProSite domains of "+sseqid)
 
-            plt.axhline(y=0, color='grey', linestyle='-')
+            # plt.axhline(y=0, color='grey', linestyle='-')
             markerline, stemline, baseline = ax.stem(midpoints, levels, linefmt="C3-", basefmt="k-", use_line_collection=True)
 
             plt.setp(markerline, mec="k", mfc="w", zorder=3)
@@ -67,10 +97,11 @@ def domain_plot(blast_output, output_dir, show=False):
             ax.get_yaxis().set_visible(False)
             # for spine in ["left", "top", "right"]
             #     ax.spines[spine].set_visible(False)
-            plt.xticks(list(range(0,800, 100)))
+            plt.xticks(list(range(0,seq_len, 100)))
             plt.ylim(-15, 13)
             ax.margins(y=0.1)
-            fig.savefig("{}{}_domains.png".format(output_dir, sseqid))
+            query_dir = output_dir.rstrip('/')+'/'+qid+'/'
+            fig.savefig("{}{}_domains.png".format(query_dir, sseqid))
             plt.close(fig)
             idx += 1
 

@@ -11,7 +11,7 @@ from Bio import SeqIO
 
 import blast as bl
 import genbank_parser as gbp
-from graphication import blast_grapher, domain_grapher
+import graphication as graph
 import muscle as ms
 import prosite_parser as proparse
 import file_handler as fh
@@ -36,8 +36,8 @@ def main():
     non_aligned.add_argument("-genBank", type=str)
     non_aligned.add_argument("-multifasta", type=str)
     non_aligned.add_argument("-database", type=str)
-    arg_parser.add_argument("-pident")
-    arg_parser.add_argument("-cov")
+    arg_parser.add_argument("-pident", type=float)
+    arg_parser.add_argument("-cov", type=float)
     arg_parser.add_argument("-e_value")
     # Sequence type argument: either 'prot' or 'nucl'
     arg_parser.add_argument("-sequence_type", choices=['prot', 'nucl'])
@@ -88,8 +88,8 @@ def main():
     if args.database or toBeContinued:
         # Perform blastp or blastn for protein or nucleotide sequences respectively
         print("Performing blast analysis...")
-        bl.blast_compute(query_fasta=query+'.fasta', database_path=database, sequence_type=args.sequence_type, cov=args.cov,
-                         pident=args.pident, e_value=E_VALUE, output_filename=blast_output, log=logfile, fasta=False)
+        bl.blast_compute(query_fasta=query+'.fasta', database_path=database, sequence_type=args.sequence_type, e_value=E_VALUE,
+                         cov_threshold=args.cov, pident_threshold=args.pident, output_filename=blast_output, log=logfile)
         # Include complete subject sequences in blast_output
         bl.retrieve_seqs(query_fasta=query+'.fasta', subject_multifasta=gb_multifasta_filename, blast_output=blast_output+'.tsv', output_dir=results,
                          output_filename=blast_output+'.tsv', remove_files=True)
@@ -107,19 +107,15 @@ def main():
         print("Computing NJ phylogenetic tree(s)...")
         ms.compute_trees(blast_output=blast_output+'.tsv', output_dir=results, output_filename="NJ.tree", log=logfile)
 
-    # # Map domains and store them
-    # print("Extracting ProSite domains...")
-    # # domains_dir = results+'domains/'
-    # # if not os.path.isdir(domains_dir): os.mkdir(domains_dir)
-    # proparse.extract_domains(input_fasta=blast_output+'.fasta', output_dir=domains_dir)
+    # Map domains and store them
+    print("Extracting ProSite domains...")
+    proparse.find_domains(blast_output=blast_output+'.tsv', output_dir=results, summary=True)
 
 
     if args.graph:
         print("Creating and storing graphs...")
-        blast_grapher.blast_plot(blast_output=blast_output+'.tsv', output_dir=results, show=False)
-    #     domain_graphs_dir = "results/graphs/domains/"
-    #     if not os.path.isdir(domain_graphs_dir): os.mkdir(domain_graphs_dir)
-    #     domain_grapher.domain_plot("results/blast_output.tsv", domain_graphs_dir)
+        graph.blast_plot(blast_output=blast_output+'.tsv', output_dir=results, show=False)
+        graph.domain_plot(blast_output=blast_output+'.tsv', output_dir=results, show=False)
 
     # Ring bell to notify completion
     print("\nProcess COMPLETED")

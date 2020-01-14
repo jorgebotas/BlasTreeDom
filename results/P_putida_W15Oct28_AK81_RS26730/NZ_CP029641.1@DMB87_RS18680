@@ -1,0 +1,86 @@
+3 domains found.
+
+
+ASN_GLYCOSYLATION
+PDOC00001
+N-glycosylation site.
+N[^P][ST][^P]
+
+************************
+* N-glycosylation site *
+************************
+
+It has been known for a long time [1] that potential N-glycosylation sites are
+specific to the consensus sequence Asn-Xaa-Ser/Thr.  It must be noted that the
+presence of the consensus  tripeptide  is  not sufficient  to conclude that an
+asparagine residue is glycosylated, due to  the fact that the  folding of  the
+protein plays an important  role in the  regulation of N-glycosylation [2]. It
+has been shown [3] that  the  presence of proline between Asn and Ser/Thr will
+inhibit N-glycosylation;  this has been confirmed by a statistical analysis of
+glycosylation sites  [4],  which  also  shows that about 50% of the sites that
+have a proline C-terminal to Ser/Thr are not glycosylated.
+
+It must also  be noted that there  are  a few  reported cases of glycosylation
+sites with the pattern Asn-Xaa-Cys; an  experimentally demonstrated occurrence
+of such a non-standard site is found in the plasma protein C [5].
+
+-Consensus pattern: N-{P}-[ST]-{P}
+                    [N is the glycosylation site]
+-Last update: May 1991 / Text revised.
+
+
+CK2_PHOSPHO_SITE
+PDOC00006
+Casein kinase II phosphorylation site.
+[ST].{2}[DE]
+
+*****************************************
+* Casein kinase II phosphorylation site *
+*****************************************
+
+Casein kinase II (CK-2) is a protein serine/threonine kinase whose activity is
+independent of  cyclic  nucleotides   and  calcium.  CK-2  phosphorylates many
+different proteins.   The  substrate  specificity [1]  of  this  enzyme can be
+summarized as follows:
+
+ (1) Under comparable conditions Ser is favored over Thr.
+ (2) An acidic residue (either Asp or Glu) must be present three residues from
+     the C-terminal of the phosphate acceptor site.
+ (3) Additional acidic  residues in  positions +1, +2, +4, and +5 increase the
+     phosphorylation rate.  Most  physiological  substrates  have at least one
+     acidic residue in these positions.
+ (4) Asp is preferred to Glu as the provider of acidic determinants.
+ (5) A basic residue at the N-terminal  of the  acceptor  site  decreases  the
+     phosphorylation rate, while an acidic one will increase it.
+
+-Consensus pattern: [ST]-x(2)-[DE]
+                    [S or T is the phosphorylation site]
+
+-Note: This pattern is found in most of the known physiological substrates.
+
+-Last update: May 1991 / Text revised.
+
+
+AMIDATION
+PDOC00009
+Amidation site.
+.G[RK][RK]
+
+******************
+* Amidation site *
+******************
+
+The precursor of  hormones  and other active  peptides  which are C-terminally
+amidated is always directly followed [1,2] by a glycine residue which provides
+the amide group, and  most often by at  least two  consecutive  basic residues
+(Arg or Lys) which generally function as an active peptide  precursor cleavage
+site.  Although all amino acids can be amidated,  neutral hydrophobic residues
+such as Val or Phe are good substrates, while  charged residues such as Asp or
+Arg  are much less reactive.  C-terminal  amidation has not  yet been shown to
+occur in unicellular organisms or in plants.
+
+-Consensus pattern: x-G-[RK]-[RK]
+                    [x is the amidation site]
+-Last update: June 1988 / First entry.
+
+

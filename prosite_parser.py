@@ -3,6 +3,7 @@
 import re
 
 from Bio.ExPASy import Prosite,Prodoc
+import pandas as pd
 
 
 def dat_parser(sequence, fields=["name", "accession", "description", "pattern"]):
@@ -72,6 +73,15 @@ def extract_domains(input_fasta, output_dir, summary=True):
         
     # CREATE SUMMARY FILE
 
+def find_domains(blast_output, output_dir, summary=True):
+    """ For each query in blast_output.tsv, extract domains of every sequence in query_sseqs.fasta """
+    df = pd.read_csv(blast_output, delimiter='\t')
+    for qid in pd.unique(df.qseqid):
+        query_dir = output_dir.rstrip('/')+'/'+qid+'/'
+        sseqs_file = query_dir+qid+'_sseqs.fasta'
+        ############### EXTRACT DIRECTLY FROM DF ###############
+        extract_domains(sseqs_file, query_dir, summary=summary)
+    return
 
 
 def main():

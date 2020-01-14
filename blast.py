@@ -32,10 +32,11 @@ def save_multifasta(input_file = "blast_output.tsv", output_filename = "blast_ou
     return
 
 
-def blast_compute(query_fasta, database_path, sequence_type, cov,  pident, e_value,
+def blast_compute(query_fasta, database_path, sequence_type, e_value, cov_threshold=0,  pident_threshold=0,
                   outfmt='6 qseqid sseqid qcovs qstart qend pident evalue', 
-                  output_filename = "blast_output", log='/dev/null', fasta = False, headers = True):
-    """ Perform blastp or blastn analysis for protein or nucleotide sequences respectively """
+                  output_filename = "blast_output", log='/dev/null'):
+    """ Perform blastp or blastn analysis for protein or nucleotide sequences respectively.
+        Output filtered by query coverage, identity percentage and e-value thresholds """
     if sequence_type == "prot":
         blast_type = 'blastp'
     elif sequence_type == "nucl":
@@ -43,22 +44,21 @@ def blast_compute(query_fasta, database_path, sequence_type, cov,  pident, e_val
 
     call([blast_type, '-query', query_fasta, '-db', database_path, '-evalue', e_value, '-out', output_filename + '.tsv', '-logfile', log, '-outfmt', outfmt])
     os.remove(log+'.perf') # log.perf file created when calling blast with -logfile argument
-    
-    # Filter out by coverage and identity percentage thresholds
-    ####################################################### MISSING ###############################################################################
-    if headers:
-        # Include headers in output .tsv file
-        first_line = outfmt[2:].replace(" ", "\t")
-        blast = open(output_filename + '.tsv', 'r')
-        blast_output = blast.read()
-        blast.close()
-        output = open(output_filename + '.tsv', 'w')
-        output.write(first_line + '\n')
-        output.write(blast_output)
-        output.close()
-    if fasta:
-        save_multifasta(output_filename + '.tsv', output_filename + '.fasta')
-    return
+    # Include headers in output .tsv file
+    first_line = outfmt[2:].replace(" ", "\t")
+    blast = open(output_filename + '.tsv', 'r')
+    blast_output = blast.read()
+    blast.close()
+    output = open(output_filename + '.tsv', 'w')
+    output.write(first_line + '\n')
+    output.write(blast_output)
+    output.close()
+    # Filter output by coverage and identity percentage thresholds
+    if pident_threshold == None: pident_threshold = 0
+    if cov_threshold == None: cov_threshold = 0 
+    df = pd.read_csv(output_filename + '.tsv', delimiter='\t')
+    filtered_output = df.loc[(df.pident >= pident_threshold) & (df.qcovs >= cov_threshold)]
+    filtered_output.to_csv(output_filename + '.tsv', sep='\t', index=False)
 
 
 def retrieve_seqs(query_fasta, subject_multifasta, blast_output, output_dir, output_filename, remove_files=False):
@@ -93,8 +93,6 @@ def main():
     arg_parser.add_argument('-sequence_type', choices=['prot', 'nucl'], required=True)
     arg_parser.add_argument('-pident')
     arg_parser.add_argument('-cov')
-    arg_parser.add_argument('-fasta', action='store_true')
-    arg_parser.add_argument('-headers', action='store_true')
     args = arg_parser.parse_args()
 
     if args.database: 
@@ -105,7 +103,7 @@ def main():
         multifasta2database(args.subject, args.sequence_type, subject_filename)
 
     blast_compute(query_fasta=args.query, database_path=database, sequence_type=args.sequence_type,
-                  pident=args.pident, cov=args.cov, e_value=E_VALUE, fasta=args.fasta, headers=args.headers)
+                  e_value=E_VALUE, cov_threshold=args.cov, pident_threshold=args.pident)
     
 
 # if __name__ == '__main__':
