@@ -11,14 +11,14 @@ from subprocess import call, PIPE, Popen
 import file_handler as fh
 
 
-def multifasta2database(multifasta, sequence_type, output_filename="database/subject", log='/dev/null'):
+def multifasta2database(multifasta, sequence_type, output_dir, output_filename='subject', log='/dev/null'):
     """ Create database from multifasta using makeblastdb """
     # Create directory for database files if it does not already exist
-    basename = os.path.basename(output_filename)
-    database_path = output_filename.replace(basename, "")
+    database_path = output_dir.rstrip('/')+'/database/'
     if not os.path.isdir(database_path): os.mkdir(database_path)
+    output = database_path+os.path.basename(output_filename)
 
-    call(['makeblastdb', '-in', multifasta, '-dbtype', sequence_type,'-logfile' , log, '-out', output_filename]) # -parse_seqids could be added
+    call(['makeblastdb', '-in', multifasta, '-dbtype', sequence_type,'-logfile' , log, '-out', output]) # -parse_seqids could be added
     return 
 
 

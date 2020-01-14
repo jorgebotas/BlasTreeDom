@@ -80,7 +80,7 @@ def domain_plot(blast_output, output_dir, show=False):
             fig, ax = plt.subplots(figsize=(15, 7), constrained_layout=True)
             ax.set(title="ProSite domains of "+sseqid)
 
-            # plt.axhline(y=0, color='grey', linestyle='-')
+            plt.axhline(y=0, color='black', linestyle='-')
             markerline, stemline, baseline = ax.stem(midpoints, levels, linefmt="C3-", basefmt="k-", use_line_collection=True)
 
             plt.setp(markerline, mec="k", mfc="w", zorder=3)
@@ -100,7 +100,8 @@ def domain_plot(blast_output, output_dir, show=False):
             plt.xticks(list(range(0,seq_len, 100)))
             plt.ylim(-15, 13)
             ax.margins(y=0.1)
-            query_dir = output_dir.rstrip('/')+'/'+qid+'/'
+            query_dir = output_dir.rstrip('/')+'/'+qid+'/domains/'
+            os.makedirs(query_dir, exist_ok=True)
             fig.savefig("{}{}_domains.png".format(query_dir, sseqid))
             plt.close(fig)
             idx += 1

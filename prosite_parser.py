@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import os
 import re
 
 from Bio.ExPASy import Prosite,Prodoc
@@ -78,9 +79,10 @@ def find_domains(blast_output, output_dir, summary=True):
     df = pd.read_csv(blast_output, delimiter='\t')
     for qid in pd.unique(df.qseqid):
         query_dir = output_dir.rstrip('/')+'/'+qid+'/'
-        sseqs_file = query_dir+qid+'_sseqs.fasta'
+        os.makedirs(query_dir+'domains/', exist_ok=True)
+        sseqs_file = query_dir+'/'+qid+'_sseqs.fasta'
         ############### EXTRACT DIRECTLY FROM DF ###############
-        extract_domains(sseqs_file, query_dir, summary=summary)
+        extract_domains(sseqs_file, query_dir+'domains/', summary=summary)
     return
 
 

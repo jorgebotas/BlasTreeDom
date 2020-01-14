@@ -5,7 +5,7 @@ import os
 import sys
 import time
 
-import datetime
+from datetime import datetime, timedelta
 from subprocess import call, PIPE, Popen
 from Bio import SeqIO
 
@@ -23,6 +23,7 @@ def main():
     E_VALUE = "1e-03"
 
     time0 = time.time()
+    now = str(datetime.now()).rsplit('.', 1)[0].replace(' ', '_')
 
     arg_parser = argparse.ArgumentParser()
     # Create mutually exclusive group of positional arguments
@@ -47,22 +48,22 @@ def main():
 
 
     if args.results_dir: results = args.results_dir
-    else: results = "results/"
+    else: results = 'results/'+now+'/'
  
     if args.multifasta: gb_multifasta_filename = args.multifasta
-    else: gb_multifasta_filename = results+"genBank_multifasta.fasta"
+    else: gb_multifasta_filename = results+'genBank_multifasta.fasta'
 
     if args.database: database = args.database
-    else: database = results+"database/genBank"
+    else: database = results+'database/genBank'
 
     if args.alignment: alignment = args.alignment
-    else: alignment = results+"alignment.fasta"
+    else: alignment = results+'alignment.fasta'
 
     toBeContinued = False # Boolean to check whether previous step(s) have been computed
     logfile = results+'_log'
     blast_output = results+'_blast_output'
 
-    if not os.path.isdir(results): os.mkdir(results)
+    if not os.path.isdir(results): os.makedirs(results, exist_ok=True)
 
     # Create a single multifasta and tsv file containing all queries if a directory is provided as argument
     if os.path.isdir(args.query):
@@ -82,7 +83,7 @@ def main():
     if args.multifasta or toBeContinued:
         # Generate database from created multifasta
         print("Generating database...")
-        bl.multifasta2database(multifasta=gb_multifasta_filename, sequence_type=args.sequence_type, output_filename=database, log=logfile)
+        bl.multifasta2database(multifasta=gb_multifasta_filename, sequence_type=args.sequence_type, output_dir=results, output_filename=database, log=logfile)
         toBeContinued = True
 
     if args.database or toBeContinued:
@@ -119,7 +120,7 @@ def main():
 
     # Ring bell to notify completion
     print("\nProcess COMPLETED")
-    print("Running time: "+ str(datetime.timedelta(seconds=(time.time() - time0))))
+    print("Running time: "+ str(timedelta(seconds=(time.time() - time0))))
     call(['echo', '\007'])
 
 
