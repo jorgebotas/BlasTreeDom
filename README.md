@@ -37,8 +37,8 @@ The following installation will be performed using conda from the command line
 
 #### [pandas](https://anaconda.org/anaconda/pandas)  
 `conda install -c anaconda pandas`  
-
-
+  
+  
 ## USAGE  
 
 ### User-friendly  
