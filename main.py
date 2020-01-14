@@ -20,7 +20,8 @@ import file_handler as fh
 
 def main():
     # e-value threshold for blast 
-    E_VALUE = "1e-03"
+    E_VALUE = '1e-03'
+    SEQ_TYPE = 'prot'
 
     time0 = time.time()
     now = str(datetime.now()).rsplit('.', 1)[0].replace(' ', '_')
@@ -29,21 +30,19 @@ def main():
     # Create mutually exclusive group of positional arguments
     # Diferent actions will be performed: from only generating tree from alignment to performing the whole script
     mutually_exclusive = arg_parser.add_mutually_exclusive_group(required=True) # One must be provided
-    mutually_exclusive.add_argument("-query", type=str)
-    mutually_exclusive.add_argument("-alignment", type=str) 
-    mutually_exclusive.add_argument("-unaligned", type=str)
+    mutually_exclusive.add_argument("-query", type=str, help='FASTA file or directory containing query protein sequences') 
+    mutually_exclusive.add_argument("-unaligned", type=str, help='FASTA file containing unaligned protein sequences')
     # Create group for inputs containing query file(s)
     non_aligned = arg_parser.add_mutually_exclusive_group()
-    non_aligned.add_argument("-genBank", type=str)
-    non_aligned.add_argument("-multifasta", type=str)
-    non_aligned.add_argument("-database", type=str)
-    arg_parser.add_argument("-pident", type=float)
-    arg_parser.add_argument("-cov", type=float)
-    arg_parser.add_argument("-e_value")
-    # Sequence type argument: either 'prot' or 'nucl'
-    arg_parser.add_argument("-sequence_type", choices=['prot', 'nucl'])
-    arg_parser.add_argument("-results_dir", type=str)
-    arg_parser.add_argument("-graph", action='store_true')
+    non_aligned.add_argument("-genBank", type=str, help='genBank file or directory parsed to extract CDS protein sequences')
+    non_aligned.add_argument("-multifasta", type=str, help='FASTA file containing subject protein sequences')
+    non_aligned.add_argument("-database", type=str, help='If database already computed, it can be provided. \
+                                                        However, original subject sequences are needed (genBank or multifasta)')
+    arg_parser.add_argument("-pident", type=float, help='Identity percentage threshold for blast analysis')
+    arg_parser.add_argument("-cov", type=float, help='Coverage (percentage) threshold for blast analysis')
+    arg_parser.add_argument("-e_value", help='E-value threshold for blast analysis')
+    arg_parser.add_argument("-results_dir", type=str, help='Output directory to store results. Default: "results/"')
+    arg_parser.add_argument("-graph", action='store_true', help='Boolean to graph blast and domains analysis outputs')
     args = arg_parser.parse_args()
 
 
@@ -77,19 +76,19 @@ def main():
     if args.genBank:
         # Generate combined multifasta with all parsed GenBank files
         print("Generating multifasta from GenBank file(s)")
-        gbp.gb_dir2multifasta(genBank_dir=args.genBank, sequence_type=args.sequence_type, output_filename=gb_multifasta_filename)
+        gbp.gb_dir2multifasta(genBank_dir=args.genBank, sequence_type=SEQ_TYPE, output_filename=gb_multifasta_filename)
         toBeContinued = True
     
     if args.multifasta or toBeContinued:
         # Generate database from created multifasta
         print("Generating database...")
-        bl.multifasta2database(multifasta=gb_multifasta_filename, sequence_type=args.sequence_type, output_dir=results, output_filename=database, log=logfile)
+        bl.multifasta2database(multifasta=gb_multifasta_filename, sequence_type=SEQ_TYPE, output_dir=results, output_filename=database, log=logfile)
         toBeContinued = True
 
     if args.database or toBeContinued:
         # Perform blastp or blastn for protein or nucleotide sequences respectively
         print("Performing blast analysis...")
-        bl.blast_compute(query_fasta=query+'.fasta', database_path=database, sequence_type=args.sequence_type, e_value=E_VALUE,
+        bl.blast_compute(query_fasta=query+'.fasta', database_path=database, sequence_type=SEQ_TYPE, e_value=E_VALUE,
                          cov_threshold=args.cov, pident_threshold=args.pident, output_filename=blast_output, log=logfile)
         # Include complete subject sequences in blast_output
         bl.retrieve_seqs(query_fasta=query+'.fasta', subject_multifasta=gb_multifasta_filename, blast_output=blast_output+'.tsv', output_dir=results,
