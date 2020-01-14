@@ -23,14 +23,18 @@ The following installation will be performed using conda from the command line
 
 #### [biopython](https://anaconda.org/anaconda/biopython)  
 `conda install -c anaconda biopython`  
+
 #### blast  
 * Via [Anaconda](https://anaconda.org/bioconda/blast)  
 * Via [NCBI website](https://www.ncbi.nlm.nih.gov/books/NBK279671/)  
+
 #### [muscle](https://anaconda.org/bioconda/muscle)  
 `conda install -c bioconda muscle`  
 `conda install -c bioconda/label/cf201901 muscle`  
+
 #### [numpy](https://anaconda.org/anaconda/numpy)  
 `conda install -c anaconda numpy`  
+
 #### [pandas](https://anaconda.org/anaconda/pandas)  
 `conda install -c anaconda pandas`  
 
