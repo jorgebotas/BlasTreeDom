@@ -1,5 +1,6 @@
 # **_BlastTreeDom_**
 
+
 #### Given query FASTA file(s) and genBank file(s):
 * Parse genBank file(s) CDS protein sequences
 * Perform blastp analysis
