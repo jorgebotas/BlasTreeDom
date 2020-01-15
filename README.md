@@ -8,7 +8,7 @@
 * Extract ProSite domains of each of the hit sequences from blastp
 
 #### Required packages
-* bipython
+* biopython
 * blast
 * muscle
 * numpy
