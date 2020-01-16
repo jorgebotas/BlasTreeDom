@@ -50,30 +50,31 @@ def domain_mapper(input_sequence):
     midpoint_list = []
     for domain in domains:
         matches = re.finditer(domain[-1], input_sequence)
-        counter = 0
         for match in matches:
-            counter += 1
             # Append end, start and name of domain hit in descending order 
             domain_list.append(domain[0])
             midpoint_list.append(match.start() + (match.end() - match.start())/2)
             domain_map[domain[0]] = match.start() + (match.end() - match.start())/2
-        # print(counter, domain)
-    # return domain_map
     return (domain_list, midpoint_list)
-    # return sorted(domain_list, reverse=True)
+
     
 
 def domain_plot(blast_output, output_dir, show=False):
-    """ Plot ProSite protein domains on blast hits from input file """
+    """ Plot ProSite protein domains of blast hits from input file """
     df = pd.read_csv(blast_output, delimiter='\t') # .set_index['sseqid']
     idx=0 #Index to extract subject sequences
     for qid in pd.unique(df.qseqid):
         data = df[df.qseqid == qid]
+        query_dir = output_dir.rstrip('/')+'/'+qid+'/domains/'
+        os.makedirs(query_dir, exist_ok=True)
+        doms = pd.read_csv(query_dir+'_domains.tsv', delimiter='\t')
         for sseqid in data.sseqid:
             subject = data[data.sseqid == sseqid]
             seq_len = len(subject.sseq[idx])
-            domains, midpoints = domain_mapper(subject.sseq[idx])
-            midpoints = [point + subject.qstart[idx] for point in midpoints]
+
+            domains = doms[doms.id == sseqid].name.to_numpy()
+            midpoints = doms[doms.id == sseqid].midpoint.to_numpy()
+
             levels = np.tile(np.arange(-9, 9 , 2), int(np.ceil(len(midpoints)/9)))[:len(midpoints)]
 
             # Create figure and plot a stem plot with the date
@@ -100,8 +101,6 @@ def domain_plot(blast_output, output_dir, show=False):
             plt.xticks(list(range(0,seq_len, 100)))
             plt.ylim(-15, 13)
             ax.margins(y=0.1)
-            query_dir = output_dir.rstrip('/')+'/'+qid+'/domains/'
-            os.makedirs(query_dir, exist_ok=True)
             fig.savefig("{}{}_domains.png".format(query_dir, sseqid))
             plt.close(fig)
             idx += 1

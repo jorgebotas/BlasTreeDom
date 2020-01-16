@@ -4,6 +4,8 @@ import os
 import re
 
 from Bio.ExPASy import Prosite,Prodoc
+from Bio.SeqIO.FastaIO import SimpleFastaParser
+import numpy as np
 import pandas as pd
 
 
@@ -42,37 +44,50 @@ def doc_parser(accession):
 
 
 
-def store_domain_info(input_sequence, output_filename, fields=["name", "accession", "description", "pattern"]):
+def store_domain_info(input_sequence, output_filename, fields=['name', 'accession', 'description', 'pattern'], location=False):
     """ Given an input protein sequence, find ProSite domains and store in output_filename.
-    Return num_domains found """
+        Return domains found """
     output_file = open(output_filename, 'w')
     domains = dat_parser(input_sequence, fields=fields)
+    located_domains = []
     output_file.write(str(len(domains))+' domains found.\n\n\n')
     for domain in domains:
-        output_file.writelines([field+'\n' for field in domain]+['\n'])
+        if location:
+            matches = re.finditer(domain[3], input_sequence)
+            for match in matches:
+                located_domains.append(domain + [match.start(), match.end(), match.start() + (match.end() - match.start())/2])
+        output_file.writelines([str(field)+'\n' for field in domain]+['\n'])
         text = doc_parser(domain[1])
         output_file.write(text + '\n')
     output_file.close()
-    return len(domains)
+    if location: return located_domains
+    else: return domains
     ## Create file containing start and end positions of domain in each of the sequences
-
 
 
 def extract_domains(input_fasta, output_dir, summary=True):
     """ Given a FASTA file, extract domains of each sequence, store in different files under same directory.
         Create summary file if requested """
-    total_domains = 0
-    n_seq = 0
-    with open(input_fasta, 'r') as input_file:
-        lines = input_file.readlines()
-        for idx in range(len(lines)):
-            if lines[idx][0] == '>':
-                n_seq += 1
-                total_domains += store_domain_info(input_sequence=lines[idx+1].strip('\n'), output_filename=output_dir+lines[idx][1:].strip('\n'))
-            else:
-                pass
-        
-    # CREATE SUMMARY FILE
+    seqids = []
+    # Store domain info: 'name', 'accession', 'description', 'pattern', 'start', 'end', 'midpoint'
+    columns = ['name', 'accession', 'description', 'pattern', 'start', 'end', 'midpoint']
+    domains = [ [] for col in columns ]
+    with open(input_fasta, 'r') as fasta:
+        for title, sequence in SimpleFastaParser(fasta):
+            seqid = title.split(None, 1)[0]
+            seq_domains = store_domain_info(input_sequence=sequence, output_filename=output_dir.rstrip('/')+'/'+seqid+'_dominfo.txt', fields=columns[:4], location=True)
+            for domain in seq_domains:
+                for idx in range(len(domains)):
+                    assert len(domains) == len(domain), ' Length error'
+                    domains[idx].append(domain[idx])
+            seqids.extend([seqid for dummy in range(len(seq_domains))])
+    df = pd.DataFrame()
+    df['id'] = pd.Series(seqids, name='id')
+    for idx in range(len(domains)):
+        df[columns[idx]] = pd.Series(domains[idx], name=columns[idx])
+    df.to_csv(output_dir.rstrip('/')+'/'+'_domains.tsv', index=False, sep='\t')
+
+
 
 def find_domains(blast_output, output_dir, summary=True):
     """ For each query in blast_output.tsv, extract domains of every sequence in query_sseqs.fasta """

@@ -17,8 +17,7 @@ def multifasta2database(multifasta, sequence_type, output_dir, output_filename='
     database_path = output_dir.rstrip('/')+'/database/'
     if not os.path.isdir(database_path): os.mkdir(database_path)
     output = database_path+os.path.basename(output_filename)
-
-    call(['makeblastdb', '-in', multifasta, '-dbtype', sequence_type,'-logfile' , log, '-out', output]) # -parse_seqids could be added
+    call(['makeblastdb', '-in', multifasta, '-dbtype', sequence_type, '-out', output], stdout=open(log), stderr=open(log)) # -parse_seqids could be added
     return 
 
 
@@ -42,8 +41,9 @@ def blast_compute(query_fasta, database_path, sequence_type, e_value, cov_thresh
     elif sequence_type == "nucl":
         blast_type = 'blastn'
 
-    call([blast_type, '-query', query_fasta, '-db', database_path, '-evalue', e_value, '-out', output_filename + '.tsv', '-logfile', log, '-outfmt', outfmt])
-    os.remove(log+'.perf') # log.perf file created when calling blast with -logfile argument
+    call([blast_type, '-query', query_fasta, '-db', database_path, '-evalue', e_value, '-out', output_filename + '.tsv', '-outfmt', outfmt], stderr=open(log)) # , '-logfile', log
+    #, stderr=open(os.path.abspath(log))
+    # os.remove(log+'.perf') # log.perf file created when calling blast with -logfile argument
     # Include headers in output .tsv file
     first_line = outfmt[2:].replace(" ", "\t")
     blast = open(output_filename + '.tsv', 'r')
@@ -106,7 +106,5 @@ def main():
                   e_value=E_VALUE, cov_threshold=args.cov, pident_threshold=args.pident)
     
 
-# if __name__ == '__main__':
-#     main()
-
-# retrieve_sseq('/Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/data/subject.fasta', '/Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/results/blast_output.tsv', '/Users/blackhoodie/Desktop/', 'merged.tsv')
+if __name__ == '__main__':
+    main()

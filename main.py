@@ -26,16 +26,18 @@ def main():
     time0 = time.time()
     now = str(datetime.now()).rsplit('.', 1)[0].replace(' ', '_')
 
-    arg_parser = argparse.ArgumentParser()
+    arg_parser = argparse.ArgumentParser(description='BlasTreeDom is a local python package that given input query and subject sequences performs: blast analysis, \
+                                                      aligment of the original sequences, computation of Neighbor-Joining phylogenetic trees using MUSCLE and \
+                                                      mapping of ProSite protein domains, providing a friendly output through graphication of the results.')
     # Create mutually exclusive group of positional arguments
     # Diferent actions will be performed: from only generating tree from alignment to performing the whole script
     mutually_exclusive = arg_parser.add_mutually_exclusive_group(required=True) # One must be provided
-    mutually_exclusive.add_argument("-query", type=str, help='FASTA file or directory containing query protein sequences') 
-    mutually_exclusive.add_argument("-unaligned", type=str, help='FASTA file containing unaligned protein sequences')
+    mutually_exclusive.add_argument("-query", type=str, nargs='+', help='FASTA file or directory containing query protein sequences') 
+    mutually_exclusive.add_argument("-unaligned", type=str, nargs='+', help='FASTA file containing unaligned protein sequences')
     # Create group for inputs containing query file(s)
     non_aligned = arg_parser.add_mutually_exclusive_group()
-    non_aligned.add_argument("-genBank", type=str, help='genBank file or directory parsed to extract CDS protein sequences')
-    non_aligned.add_argument("-multifasta", type=str, help='FASTA file containing subject protein sequences')
+    non_aligned.add_argument("-genBank", type=str, nargs='+', help='genBank file or directory parsed to extract CDS protein sequences')
+    non_aligned.add_argument("-multifasta", type=str, nargs='+', help='FASTA file containing subject protein sequences')
     non_aligned.add_argument("-database", type=str, help='If database already computed, it can be provided. \
                                                         However, original subject sequences are needed (genBank or multifasta)')
     arg_parser.add_argument("-pident", type=float, help='Identity percentage threshold for blast analysis')
@@ -48,27 +50,37 @@ def main():
 
     if args.results_dir: results = args.results_dir
     else: results = 'results/'+now+'/'
- 
-    if args.multifasta: gb_multifasta_filename = args.multifasta
-    else: gb_multifasta_filename = results+'genBank_multifasta.fasta'
+    os.makedirs(results, exist_ok=True) # Recursively create results directory 
+
+    # Create a single multifasta and tsv file containing all queries from input (single, several files or directory)
+    if len(args.query) == 1:
+        query = results+os.path.basename(args.query[0]).rsplit('.', 1)[0] 
+    else: 
+        query = results+'query'
+    fh.merge_files(input_files=args.query, output_dir=results, output_filename=query+'.fasta')
+
+    # Create a single multifasta file containing all subject sequences from input (single, several files or directory)
+    if len(args.multifasta) == 1: 
+        gb_multifasta_filename = results+os.path.basename(args.multifasta[0])
+    else: 
+        gb_multifasta_filename = results+'genBank_multifasta.fasta'
+    fh.merge_files(input_files=args.multifasta, output_dir=results, output_filename=gb_multifasta_filename)
 
     if args.database: database = args.database
     else: database = results+'database/genBank'
 
-    if args.alignment: alignment = args.alignment
-    else: alignment = results+'alignment.fasta'
-
     toBeContinued = False # Boolean to check whether previous step(s) have been computed
     logfile = results+'_log'
+    open(logfile, 'w').close() # Create logfile
     blast_output = results+'_blast_output'
 
-    if not os.path.isdir(results): os.makedirs(results, exist_ok=True)
+    # Create a single multifasta and tsv file containing all queries from input (single, several files or directory)
+    if len(args.query) == 1:
+        query = results+os.path.basename(args.query[0]).rsplit('.', 1)[0] 
+    else: 
+        query = results+'query'
+    fh.merge_files(input_files=args.query, output_dir=results, output_filename=query+'.fasta')
 
-    # Create a single multifasta and tsv file containing all queries if a directory is provided as argument
-    if os.path.isdir(args.query):
-        query = results+os.path.basename(args.query)
-        fh.merge_files(directory=args.query, output_dir=results, output_filename=query+'.fasta')
-    else: query = args.query.rsplit('.', 1)[0]
 
     # Create directory for each query, inside results
     fh.fasta2dirs(fasta_file=query+'.fasta', output_dir=results)
@@ -76,7 +88,7 @@ def main():
     if args.genBank:
         # Generate combined multifasta with all parsed GenBank files
         print("Generating multifasta from GenBank file(s)")
-        gbp.gb_dir2multifasta(genBank_dir=args.genBank, sequence_type=SEQ_TYPE, output_filename=gb_multifasta_filename)
+        gbp.gbs2multifasta(genBanks=args.genBank, sequence_type=SEQ_TYPE, output_filename=gb_multifasta_filename)
         toBeContinued = True
     
     if args.multifasta or toBeContinued:
@@ -102,10 +114,9 @@ def main():
         toBeContinued = True
 
 
-    if args.alignment or toBeContinued:
-        # Compute NJ tree using MUSCLE
-        print("Computing NJ phylogenetic tree(s)...")
-        ms.compute_trees(blast_output=blast_output+'.tsv', output_dir=results, output_filename="NJ.tree", log=logfile)
+    # Compute NJ tree using MUSCLE
+    print("Computing NJ phylogenetic tree(s)...")
+    ms.compute_trees(blast_output=blast_output+'.tsv', output_dir=results, output_filename="NJ.tree", log=logfile)
 
     # Map domains and store them
     print("Extracting ProSite domains...")

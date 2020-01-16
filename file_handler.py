@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import re
 
 from subprocess import call, PIPE, Popen
 from Bio.SeqIO.FastaIO import SimpleFastaParser
@@ -7,28 +8,36 @@ import pandas as pd
 
 
 
-def merge_files(directory, output_dir, output_filename):
-    """ Merge files from input directory """
-    files = os.listdir(directory)
-    with open(output_dir.rstrip('/')+'/'+os.path.basename(output_filename), 'w') as output_file:
-        for file in files:
-            with open(directory.rstrip('/')+'/'+file, 'r') as text:
-                output_file.write(text.read())
-    return
+def list_all(input_list):
+    """ Recursively list all the files in given list of files and directories """
+    expanded_list = []
+    regex = re.compile(r'^\.') # Remove hidden files when listing a directory
+    for item in input_list:
+        if os.path.isdir(item):
+            ls_dir = [item.rstrip('/')+'/'+file for file in os.listdir(item) if not regex.match(file)]
+            expanded_list.extend(list_all(ls_dir))
+        else:
+            expanded_list.append(item)
+    return expanded_list
 
+
+def merge_files(input_files, output_dir, output_filename):
+    """ Merge files from input list of files and/or directories """
+    with open(output_dir.rstrip('/')+'/'+os.path.basename(output_filename), 'w') as output_file:
+        for file in list_all(input_files):
+            with open(file, 'r') as text:
+                output_file.write(text.read())
+    return 
 
 def fasta2dirs(fasta_file, output_dir):
-    """ Generate directory inside output_dir for each sequence id in FASTA file.
-        Return total number of ids/sequences """
+    """ Generate directory inside output_dir for each sequence id in FASTA file """
     if not os.path.isdir(output_dir): os.mkdir(output_dir)
-    total_ids = 0
     with open(fasta_file, 'r') as fasta:
         for title, dummy_seq in SimpleFastaParser(fasta):
             identifier = title.split(None, 1)[0]
             directory = output_dir.rstrip('/')+'/'+identifier
             if not os.path.isdir(directory): os.mkdir(directory)
-            total_ids += 1
-    return total_ids
+    return
 
 def fasta2tsv(fasta_file, output_dir, output_filename, fields=['id', 'seq'], seq_length=False):
     """ Create dataframe from FASTA file """
@@ -58,7 +67,7 @@ def tsv2fasta(tsv_file, output_dir, separate_dirs=False):
     for qseqid in pd.unique(df.qseqid):
         if separate_dirs: 
             filename = output_dir.rstrip('/')+'/{}/{}_sseqs.fasta'.format(qseqid, qseqid)
-            if not os.path.isdir(output_dir.rstrip('/')+'/'+qseqid): os.mkdir(output_dir.rstrip('/')+'/'+qseqid)
+            os.makedirs(output_dir.rstrip('/')+'/'+qseqid, exist_ok=True)
         else: filename = output_dir.rstrip('/')+'/'+qseqid+'_sseqs.fasta' 
         data = df[df.qseqid == qseqid].reset_index(drop=True)
         with open(filename, 'w') as fasta:

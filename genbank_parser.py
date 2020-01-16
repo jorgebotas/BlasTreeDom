@@ -21,22 +21,24 @@ def genBank2multifasta(genBank, sequence_type, output_file = None):
                 strand = feature.location.strand # Positive or negative strand 
                 if feature.type == 'CDS':
                     try:
-                        multifasta += ">" + feature.qualifiers['protein_id'][0] + " "
-                    except:
-                        multifasta += ">"
-                    try:
-                        multifasta += feature.qualifiers['product'][0] + " "
-                    except:
-                        pass
-                    multifasta += record.name + "\n"
-                    if sequence_type == "prot":
-                        multifasta += feature.qualifiers['translation'][0] + "\n"
-                    else:
-                        if strand > 0:
-                            multifasta += seq[start : end] + "\n"
+                        try:
+                            multifasta += ">" + feature.qualifiers['protein_id'][0] + " "
+                        except:
+                            multifasta += ">"
+                        try:
+                            multifasta += feature.qualifiers['product'][0] + " "
+                        except:
+                            pass
+                        multifasta += record.name + "\n"
+                        if sequence_type == "prot":
+                            multifasta += feature.qualifiers['translation'][0] + "\n"
                         else:
-                            # If strand is negative, the coding sequence is the reverse complementary
-                            multifasta += seq[start : end].reverse_complement() + "\n"
+                            if strand > 0:
+                                multifasta += seq[start : end] + "\n"
+                            else:
+                                # If strand is negative, the coding sequence is the reverse complementary
+                                multifasta += seq[start : end].reverse_complement() + "\n"
+                    except: pass
     # Create .fasta file containing nucleotide/protein sequences
     if output_file:
         output = open(str(output_file) + ".fasta", 'r+')
@@ -47,9 +49,9 @@ def genBank2multifasta(genBank, sequence_type, output_file = None):
     return multifasta
 
 
-def gb_dir2multifasta(genBank_dir, sequence_type, output_filename):
+def gbs2multifasta(genBanks, sequence_type, output_filename):
     """ Generate multifasta with all sequences in all genBank files in input directory """
-    genBank_list = os.listdir(genBank_dir)
+    genBank_list = fh.list_all(genBanks)
     genBank_multifasta = ""
     for genBank_doc in genBank_list:
         genBank_multifasta += genBank2multifasta(genBank_doc, sequence_type)
