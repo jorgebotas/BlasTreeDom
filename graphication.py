@@ -27,7 +27,8 @@ def blast_plot(blast_output, output_dir, show=False):
         # Plot totality of query (100% coverage)
         sns.barplot(data=data, x='qseqlen', y='sseqid' , color="lightgrey")
         # Plot coverage 
-        sns.barplot(data=data, x="qend", y="sseqid", hue='pident greater than', palette=sns.light_palette('green'), dodge=False) #dodge avoids hue shrinkage of width
+        sns.barplot(data=data, x="qend", y="sseqid", hue='pident greater than', hue_order=list(range(10,110,10)), 
+                    palette=sns.light_palette('green', n_colors=10), dodge=False) #dodge avoids hue shrinkage of width
         # Plot N-terminal if uncovered
         sns.barplot(data=data, x="qstart", y="sseqid", color='lightgrey')
         ax.set(xlabel='Blast overlap', ylabel='subject Accession Number', title=str(query)+' blast output plot')
