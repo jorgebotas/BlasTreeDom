@@ -64,3 +64,29 @@ As arguments the following will be expected:
   
 * If no blast analysis is required, unaligned sequences in a FASTA file can be provided  
 `-unaligned unaligned.fasta`  
+
+## Output  
+
+Results will be stored in a directory named by date and time of command execution.  
+Within this directory the following can be found: a _log_ file, database folder, merged query and subject (extracted from genBnak files) FASTA files, and a separate folder for each input query   
+
+### blast  
+
+* A tsv file containing all results  
+* Graphical representation of output:  
+
+![](images/blast.png)  
+
+
+### Alignment and N-J tree  
+
+* Unaligned and aligned sequences will be stored in each query directory  
+* Neighbor-Joining tree computed using MUSCLE  
+
+### ProSite domains  
+
+* A tsv file containing information on: sequence accession number (id) and name, accession, description, pattern, start and end location of found ProSite domains  
+* A txt file for each query and hit sequence containing the domains information plus additional text parsed from prosite.doc  
+* Graphical representation for each protein sequence:  
+
+![](images/domains.png) 
