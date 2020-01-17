@@ -60,7 +60,7 @@ def domain_plot(blast_output, output_dir, show=False):
             # Create different levels for domain name tags
             levels = np.tile(np.arange(-9, 9 , 2), int(np.ceil(len(midpoints)/9)))[:len(midpoints)]
             fig, ax = plt.subplots(figsize=(15, 7), constrained_layout=True)
-            ax.set_title(label="ProSite domains of "+sseqid, fontdict={'fontsize':11})
+            ax.set_title(label="ProSite domains of "+sseqid, fontdict={'fontsize':13})
             plt.axhline(y=0, color='black', linestyle='-')
             # Represent domains as lines (and hollow dots) on the sequence. Stem plot
             markerline, dummy_stemline, dummy_baseline = ax.stem(midpoints, levels, linefmt="C3-", basefmt="k-", use_line_collection=True)
@@ -73,7 +73,7 @@ def domain_plot(blast_output, output_dir, show=False):
                 ax.annotate(r, xy=(d, l), xytext=(3, np.sign(l)*3), textcoords="offset points", va=va, ha="right", **{'fontsize':6, 'rotation':'vertical'}) # xytext=(-3, np.sign(l)*3), textcoords="offset points"
             # remove y axis
             ax.get_yaxis().set_visible(False)
-            plt.xticks(list(range(0,seq_len, 50))+[seq_len],  **{'fontsize':9})
+            plt.xticks(list(range(0,seq_len, 50))+[seq_len],  **{'fontsize':11})
             plt.ylim(-15, 13)
             ax.margins(y=0.1)
             fig.savefig("{}{}_domains.png".format(query_dir, sseqid))
