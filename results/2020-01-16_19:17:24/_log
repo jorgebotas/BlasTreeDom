@@ -1,0 +1,72 @@
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Rhizobium_tropici/alignment.fasta -out results/2020-01-16_19:17:24/Rhizobium_tropici/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Rhizobium_tropici/alignment.fasta -out results/2020-01-16_19:17:24/Rhizobium_tropici/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Rhizobium_tropici/alignment.fasta -out results/2020-01-16_19:17:24/Rhizobium_tropici/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Rhizobium_tropici/alignment.fasta -out results/2020-01-16_19:17:24/Rhizobium_tropici/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Rhizobium_tropici/alignment.fasta -out results/2020-01-16_19:17:24/Rhizobium_tropici/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Rhizobium_tropici/alignment.fasta -out results/2020-01-16_19:17:24/Rhizobium_tropici/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Paraburkholderia_caribensis/alignment.fasta -out results/2020-01-16_19:17:24/Paraburkholderia_caribensis/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Paraburkholderia_caribensis/alignment.fasta -out results/2020-01-16_19:17:24/Paraburkholderia_caribensis/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Paraburkholderia_caribensis/alignment.fasta -out results/2020-01-16_19:17:24/Paraburkholderia_caribensis/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Paraburkholderia_caribensis/alignment.fasta -out results/2020-01-16_19:17:24/Paraburkholderia_caribensis/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Paraburkholderia_caribensis/alignment.fasta -out results/2020-01-16_19:17:24/Paraburkholderia_caribensis/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Paraburkholderia_caribensis/alignment.fasta -out results/2020-01-16_19:17:24/Paraburkholderia_caribensis/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Mesorhizobium_sp/alignment.fasta -out results/2020-01-16_19:17:24/Mesorhizobium_sp/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Mesorhizobium_sp/alignment.fasta -out results/2020-01-16_19:17:24/Mesorhizobium_sp/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Mesorhizobium_sp/alignment.fasta -out results/2020-01-16_19:17:24/Mesorhizobium_sp/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Mesorhizobium_sp/alignment.fasta -out results/2020-01-16_19:17:24/Mesorhizobium_sp/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Mesorhizobium_sp/alignment.fasta -out results/2020-01-16_19:17:24/Mesorhizobium_sp/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/Mesorhizobium_sp/alignment.fasta -out results/2020-01-16_19:17:24/Mesorhizobium_sp/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/alignment.fasta -out results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/alignment.fasta -out results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:29 2020
+muscle -maketree -in results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/alignment.fasta -out results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:29 2020
+Started Thu Jan 16 19:17:30 2020
+muscle -maketree -in results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/alignment.fasta -out results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:30 2020
+Started Thu Jan 16 19:17:30 2020
+muscle -maketree -in results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/alignment.fasta -out results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:30 2020
+Started Thu Jan 16 19:17:30 2020
+muscle -maketree -in results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/alignment.fasta -out results/2020-01-16_19:17:24/P_putida_W15Oct28_AK81_RS26730/NJ.tree -quiet -loga results/2020-01-16_19:17:24/_log -cluster neighborjoining 
+Finished Thu Jan 16 19:17:30 2020
