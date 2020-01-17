@@ -1,0 +1,71 @@
+2 domains found.
+
+
+CK2_PHOSPHO_SITE
+PDOC00006
+Casein kinase II phosphorylation site.
+[ST].{2}[DE]
+
+*****************************************
+* Casein kinase II phosphorylation site *
+*****************************************
+
+Casein kinase II (CK-2) is a protein serine/threonine kinase whose activity is
+independent of  cyclic  nucleotides   and  calcium.  CK-2  phosphorylates many
+different proteins.   The  substrate  specificity [1]  of  this  enzyme can be
+summarized as follows:
+
+ (1) Under comparable conditions Ser is favored over Thr.
+ (2) An acidic residue (either Asp or Glu) must be present three residues from
+     the C-terminal of the phosphate acceptor site.
+ (3) Additional acidic  residues in  positions +1, +2, +4, and +5 increase the
+     phosphorylation rate.  Most  physiological  substrates  have at least one
+     acidic residue in these positions.
+ (4) Asp is preferred to Glu as the provider of acidic determinants.
+ (5) A basic residue at the N-terminal  of the  acceptor  site  decreases  the
+     phosphorylation rate, while an acidic one will increase it.
+
+-Consensus pattern: [ST]-x(2)-[DE]
+                    [S or T is the phosphorylation site]
+
+-Note: This pattern is found in most of the known physiological substrates.
+
+-Last update: May 1991 / Text revised.
+
+
+MYRISTYL
+PDOC00008
+N-myristoylation site.
+G[^EDRKHPFYW].{2}[STAGCN][^P]
+
+*************************
+* N-myristoylation site *
+*************************
+
+An  appreciable  number of eukaryotic  proteins  are  acylated by the covalent
+addition of myristate (a C14-saturated fatty acid) to their N-terminal residue
+via an amide linkage [1,2]. The sequence specificity of the enzyme responsible
+for this  modification,   myristoyl CoA:protein N-myristoyl transferase (NMT),
+has been  derived from the sequence of known N-myristoylated proteins and from
+studies using synthetic peptides. It seems to be the following:
+
+ - The N-terminal residue must be glycine.
+ - In position 2, uncharged residues  are allowed.  Charged residues,  proline
+   and large hydrophobic residues are not allowed.
+ - In positions 3 and 4, most, if not all, residues are allowed.
+ - In position  5,  small uncharged  residues are allowed (Ala, Ser, Thr, Cys,
+   Asn and Gly). Serine is favored.
+ - In position 6, proline is not allowed.
+
+-Consensus pattern: G-{EDRKHPFYW}-x(2)-[STAGCN]-{P}
+                    [G is the N-myristoylation site]
+
+-Note: We  deliberately include as  potential myristoylated  glycine residues,
+ those which  are  internal  to a sequence. It could well be that the sequence
+ under study  represents  a  viral  polyprotein  precursor and that subsequent
+ proteolytic processing  could expose an internal glycine as the N-terminal of
+ a mature protein.
+
+-Last update: October 1989 / Pattern and text revised.
+
+
