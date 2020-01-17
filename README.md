@@ -89,4 +89,4 @@ Within this directory the following can be found: a _log_ file, database folder,
 * A txt file for each query and hit sequence containing the domains information plus additional text parsed from prosite.doc  
 * Graphical representation for each protein sequence:  
 
-![](images/domains.png) 
+![](images/domains_amplified.png) 
