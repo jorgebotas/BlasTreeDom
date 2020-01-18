@@ -16,7 +16,7 @@ def multiple_alignment(multifasta, query=None, output_filename="alignment.fasta"
         with open(multifasta, 'a+') as multifasta_file:
             multifasta_file.write('>'+query[0]+'\n')
             multifasta_file.write(query[1]+'\n')
-    call(['muscle', '-in', multifasta, '-out', output_filename, '-verbose', '-loga', '/dev/null'], stderr=open(log))
+    call(['muscle', '-in', multifasta, '-out', output_filename, '-verbose', '-loga', '/dev/null'], stderr=open(log, 'a+'))
     return
 
 
@@ -34,7 +34,7 @@ def compute_alignments(blast_output, output_dir):
 def compute_NJtree(alignment, output_filename="NJ.tree", log='/dev/null'):
     """ Compute Neighbor-Joining tree using MUSCLE """
     # muscle -maketree -in $alignment -out "$directory/NJ_$type.tree" -cluster neighborjoining 1>>$log 2>>$log
-    call(['muscle', '-maketree', '-in', alignment, '-out', output_filename, '-quiet', '-loga', log, '-cluster', 'neighborjoining'], stderr=open(log))
+    call(['muscle', '-maketree', '-in', alignment, '-out', output_filename, '-quiet', '-loga', log, '-cluster', 'neighborjoining'], stderr=open(log, 'a+'))
     return 
 
 

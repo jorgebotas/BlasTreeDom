@@ -75,10 +75,10 @@ def extract_domains(input_fasta, output_dir, summary=True):
     with open(input_fasta, 'r') as fasta:
         for title, sequence in SimpleFastaParser(fasta):
             seqid = title.split(None, 1)[0]
-            seq_domains = store_domain_info(input_sequence=sequence, output_filename=output_dir.rstrip('/')+'/'+seqid+'_dominfo.txt', fields=columns[:4], location=True)
+            seq_domains = store_domain_info(input_sequence=sequence, output_filename=output_dir.rstrip('/')+'/'+seqid+'_dominfo.txt', 
+                                            fields=columns[:4], location=True)
             for domain in seq_domains:
                 for idx in range(len(domains)):
-                    assert len(domains) == len(domain), ' Length error'
                     domains[idx].append(domain[idx])
             seqids.extend([seqid for dummy in range(len(seq_domains))])
     df = pd.DataFrame()

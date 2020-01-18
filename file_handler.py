@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import os
 import re
-
 from subprocess import call, PIPE, Popen
+
 from Bio.SeqIO.FastaIO import SimpleFastaParser
+import numpy as np
 import pandas as pd
 
 
@@ -77,15 +78,17 @@ def tsv2fasta(tsv_file, output_dir, separate_dirs=False):
     return
 
 
-# df2fasta('/Users/blackhoodie/Desktop/merged.tsv', '/Users/blackhoodie/Desktop')
-# fasta2dirs('/Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/data/query.fasta', '/Users/blackhoodie/Desktop/blast')
-# fasta2tsv('/Users/blackhoodie/Documents/Biotech/IV/ProgBioinf/domain_finder/data/query.fasta', '/Users/blackhoodie/Desktop', 'fasta.tsv', fields=['sseqid', 'seq', 'seq_length'],seq_length=True)
-
-
-# def list_files(directory):
-#     """ Return iterable list with all the files in input directory """
-#     dir_ls = Popen(['ls', os.path.abspath(directory)], stdout = PIPE, stderr = PIPE)
-#     dir_list = dir_ls.stdout.read().decode('utf-8').splitlines()
-#     dir_ls.stdout.close()
-#     dir_ls.stderr.close()
-#     return dir_list
+def merge_results(blast_output, genBank_tsv, output_dir, output_filename):
+    """ Merge blast_output and genBank parsed fields to create an integrated ouput file """
+    blast = pd.read_csv(output_dir.rstrip('/')+'/'+os.path.basename(blast_output), delimiter='\t').drop(columns=['qseqlen'])
+    fields0 = ['protein_id', 'gene', 'locus_tag', 'EC_number', 'product', 'db_xref']
+    fields = ['sseqid', 'gene', 'locus_tag', 'EC_number', 'product', 'db_xref']
+    genBank = pd.read_csv(output_dir.rstrip('/')+'/'+os.path.basename(genBank_tsv), delimiter='\t').rename(columns=dict(zip(fields0, fields)))
+    merged_df = pd.merge(left=genBank, right=blast, on='sseqid')
+    columns = merged_df.columns.values
+    columns = np.delete(columns, np.argwhere(columns=='qseqid'))
+    columns = np.append(np.array(['qseqid']), columns)
+    print(columns)
+    merged_df = merged_df[columns]
+    merged_df.to_csv(output_dir.rstrip('/')+'/'+os.path.basename(output_filename), index=False, sep='\t')
+    return

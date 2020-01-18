@@ -31,7 +31,9 @@ def blast_plot(blast_output, output_dir, show=False):
                     palette=sns.light_palette('green', n_colors=10), dodge=False) #dodge avoids hue shrinkage of width
         # Plot N-terminal if uncovered
         sns.barplot(data=data, x="qstart", y="sseqid", color='lightgrey')
-        ax.set(xlabel='Blast overlap', ylabel='subject Accession Number', title=str(query)+' blast output plot')
+        ax.set_xlabel(xlabel='Blast overlap', **{'fontsize':11})
+        ax.set_ylabel(ylabel='subject Accession Number', **{'fontsize':11})
+        ax.set_title(label=str(query)+' blast output plot', **{'fontsize':13})
         ax.legend(title='pident lower or equal to', loc='lower left', bbox_to_anchor=(1, 0))
         fig.tight_layout()
         # Save figure in appropiate directory
@@ -75,7 +77,7 @@ def domain_plot(blast_output, output_dir, show=False):
             ax.get_yaxis().set_visible(False)
             plt.ylim(-15, 13)
             plt.xticks(list(range(0,seq_len, 50))+[seq_len],  **{'fontsize':9})
-            ax.set_xlabel(str(sseqid)+' protein sequence', **{'fontsize':11})
+            ax.set_xlabel(xlabel=str(sseqid)+' protein sequence', **{'fontsize':11})
             ax.margins(y=0.1)
             fig.savefig("{}{}_domains.png".format(query_dir, sseqid))
             plt.close(fig)
