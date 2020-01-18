@@ -11,7 +11,7 @@ import seaborn as sns
 import prosite_parser as prop
 
 
-def blast_plot(blast_output, output_dir, show=False):
+def blast_plot(blast_output, output_dir):
     """ Plot blast output for each of the queries provided in input file """
     df = pd.read_csv(blast_output, delimiter='\t')
     df = df.sort_values(['qseqid', 'qcovs', 'pident', 'evalue'], ascending=[1, 0, 0, 0]).reset_index(drop=True)
@@ -38,12 +38,10 @@ def blast_plot(blast_output, output_dir, show=False):
         graph_dir = output_dir.rstrip('/')+'/'+query+'/'
         if not os.path.isdir(graph_dir): os.mkdir(graph_dir)
         fig.savefig(graph_dir+'blast.png')
-        # if show:
-        #     plt.show()
         plt.close(fig)
     
 
-def domain_plot(blast_output, output_dir, show=False):
+def domain_plot(blast_output, output_dir):
     """ Plot ProSite protein domains of blast hits from input file """
     df = pd.read_csv(blast_output, delimiter='\t') # .set_index['sseqid']
     idx=0 #Index to extract subject sequences
@@ -59,8 +57,8 @@ def domain_plot(blast_output, output_dir, show=False):
             midpoints = doms[doms.id == sseqid].midpoint.to_numpy()
             # Create different levels for domain name tags
             levels = np.tile(np.arange(-9, 9 , 2), int(np.ceil(len(midpoints)/9)))[:len(midpoints)]
-            fig, ax = plt.subplots(figsize=(15, 10), constrained_layout=True)
-            ax.set_title(label="ProSite domains of "+str(sseqid), fontdict={'fontsize':15}) # 13
+            fig, ax = plt.subplots(figsize=(15, 9), constrained_layout=True)
+            ax.set_title(label="ProSite domains of "+str(sseqid), fontdict={'fontsize':13})
             plt.axhline(y=0, color='black', linestyle='-')
             # Represent domains as lines (and hollow dots) on the sequence. Stem plot
             markerline, dummy_stemline, dummy_baseline = ax.stem(midpoints, levels, linefmt="C3-", basefmt="k-", use_line_collection=True)
@@ -70,12 +68,12 @@ def domain_plot(blast_output, output_dir, show=False):
             # Annotate lines
             vert = np.array(['top', 'bottom'])[(levels > 0).astype(int)]
             for d, l, r, va in zip(midpoints, levels, domains, vert):
-                ax.annotate(r, xy=(d, l), xytext=(3, np.sign(l)*3), textcoords="offset points", va=va, ha="right", **{'fontsize':10, 'rotation':'vertical'}) # 6
+                ax.annotate(r, xy=(d, l), xytext=(3, np.sign(l)*3), textcoords="offset points", va=va, ha="right", **{'fontsize':6, 'rotation':'vertical'})
             # remove y axis
             ax.get_yaxis().set_visible(False)
             plt.ylim(-15, 13)
-            plt.xticks(list(range(0,seq_len, 50))+[seq_len],  **{'fontsize':11}) # 9
-            ax.set_xlabel(xlabel='protein sequence', **{'fontsize':13}) # 11
+            plt.xticks(list(range(0,seq_len, 50))+[seq_len],  **{'fontsize':9})
+            ax.set_xlabel(xlabel='protein sequence', **{'fontsize':11})
             ax.margins(y=0.1)
             fig.savefig("{}{}_domains.png".format(query_dir, sseqid))
             plt.close(fig)

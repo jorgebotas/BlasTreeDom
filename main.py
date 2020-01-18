@@ -141,8 +141,8 @@ def main():
 
     if args.graph:
         print("Creating and storing graphs...")
-        graph.blast_plot(blast_output=blast_output+'.tsv', output_dir=results, show=False)
-        graph.domain_plot(blast_output=blast_output+'.tsv', output_dir=results, show=False)
+        graph.blast_plot(blast_output=blast_output+'.tsv', output_dir=results)
+        graph.domain_plot(blast_output=blast_output+'.tsv', output_dir=results)
 
     # Ring bell to notify completion
     print("\nProcess COMPLETED")
