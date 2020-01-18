@@ -35,6 +35,10 @@ def friendly_user_interfase():
         else: 
             print('\n\nIncorrect input, try again!\n\n')
             exit(1)
+        print('\n\nLet us get some parameters to perform a BLAST analysis\n\n')
+        cov = float(input('\n\nEnter coverage threshold\n\n>  ').strip(' '))
+        pident = float(input('\n\nEnter identity percentage threshold\n\n>  ').strip(' '))
+        e_value = str(float(input('\n\nEnter e-value threshold\n\n>  ').strip(' ')))
     else: 
         print('\n\nIncorrect input, try again!\n\n')
         exit(1)

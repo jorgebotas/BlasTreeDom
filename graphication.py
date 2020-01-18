@@ -19,10 +19,8 @@ def blast_plot(blast_output, output_dir, show=False):
     df['pident greater than'] = round(df.pident / 10) * 10
     for query in pd.unique(df.qseqid):
         data = df[df.qseqid == query]
-        # with plt.style.context('dark_background'):
         sns.set(context='paper', font_scale=.9, font='times')
         sns.set_style('white')
-        # plt.rc('ytick', labelsize=2)
         fig, ax = plt.subplots(figsize=(8,8), clear=True)
         # Plot totality of query (100% coverage)
         sns.barplot(data=data, x='qseqlen', y='sseqid' , color="lightgrey")
@@ -40,8 +38,8 @@ def blast_plot(blast_output, output_dir, show=False):
         graph_dir = output_dir.rstrip('/')+'/'+query+'/'
         if not os.path.isdir(graph_dir): os.mkdir(graph_dir)
         fig.savefig(graph_dir+'blast.png')
-        if show:
-            plt.show()
+        # if show:
+        #     plt.show()
         plt.close(fig)
     
 
@@ -61,8 +59,8 @@ def domain_plot(blast_output, output_dir, show=False):
             midpoints = doms[doms.id == sseqid].midpoint.to_numpy()
             # Create different levels for domain name tags
             levels = np.tile(np.arange(-9, 9 , 2), int(np.ceil(len(midpoints)/9)))[:len(midpoints)]
-            fig, ax = plt.subplots(figsize=(15, 7), constrained_layout=True)
-            ax.set_title(label="ProSite domains of "+str(sseqid), fontdict={'fontsize':13})
+            fig, ax = plt.subplots(figsize=(15, 10), constrained_layout=True)
+            ax.set_title(label="ProSite domains of "+str(sseqid), fontdict={'fontsize':15}) # 13
             plt.axhline(y=0, color='black', linestyle='-')
             # Represent domains as lines (and hollow dots) on the sequence. Stem plot
             markerline, dummy_stemline, dummy_baseline = ax.stem(midpoints, levels, linefmt="C3-", basefmt="k-", use_line_collection=True)
@@ -72,17 +70,14 @@ def domain_plot(blast_output, output_dir, show=False):
             # Annotate lines
             vert = np.array(['top', 'bottom'])[(levels > 0).astype(int)]
             for d, l, r, va in zip(midpoints, levels, domains, vert):
-                ax.annotate(r, xy=(d, l), xytext=(3, np.sign(l)*3), textcoords="offset points", va=va, ha="right", **{'fontsize':6, 'rotation':'vertical'})
+                ax.annotate(r, xy=(d, l), xytext=(3, np.sign(l)*3), textcoords="offset points", va=va, ha="right", **{'fontsize':10, 'rotation':'vertical'}) # 6
             # remove y axis
             ax.get_yaxis().set_visible(False)
             plt.ylim(-15, 13)
-            plt.xticks(list(range(0,seq_len, 50))+[seq_len],  **{'fontsize':9})
-            ax.set_xlabel(xlabel=str(sseqid)+' protein sequence', **{'fontsize':11})
+            plt.xticks(list(range(0,seq_len, 50))+[seq_len],  **{'fontsize':11}) # 9
+            ax.set_xlabel(xlabel='protein sequence', **{'fontsize':13}) # 11
             ax.margins(y=0.1)
             fig.savefig("{}{}_domains.png".format(query_dir, sseqid))
             plt.close(fig)
             idx += 1
 
-
-
-# # https://matplotlib.org/3.1.1/users/event_handling.html#mouse-enter-and-leave

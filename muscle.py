@@ -27,13 +27,12 @@ def compute_alignments(blast_output, output_dir):
         data = df[df.qseqid == qid].reset_index(drop=True)
         query_dir = output_dir.rstrip('/')+'/'+qid+'/'
         fh.tsv2fasta(tsv_file=blast_output, output_dir=output_dir, separate_dirs=True) # Create FASTA file containing hits for each query
-        multiple_alignment(multifasta=query_dir+qid+'_sseqs.fasta', query=(qid, data.qseq[0]), output_filename=query_dir+'alignment.fasta')
+        multiple_alignment(multifasta=query_dir+'unaligned.fasta', query=(qid, data.qseq[0]), output_filename=query_dir+'alignment.fasta')
     return
 
 
 def compute_NJtree(alignment, output_filename="NJ.tree", log='/dev/null'):
     """ Compute Neighbor-Joining tree using MUSCLE """
-    # muscle -maketree -in $alignment -out "$directory/NJ_$type.tree" -cluster neighborjoining 1>>$log 2>>$log
     call(['muscle', '-maketree', '-in', alignment, '-out', output_filename, '-quiet', '-loga', log, '-cluster', 'neighborjoining'], stderr=open(log, 'a+'))
     return 
 

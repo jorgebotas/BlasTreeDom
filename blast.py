@@ -42,9 +42,7 @@ def blast_compute(query_fasta, database_path, sequence_type, e_value, cov_thresh
         blast_type = 'blastn'
     output = output_dir.rstrip('/')+'/'+os.path.basename(output_filename)
 
-    call([blast_type, '-query', query_fasta, '-db', database_path, '-evalue', e_value, '-out', output+'.tsv', '-outfmt', outfmt], stderr=open(log, 'a+')) # , '-logfile', log
-    #, stderr=open(os.path.abspath(log))
-    # os.remove(log+'.perf') # log.perf file created when calling blast with -logfile argument
+    call([blast_type, '-query', query_fasta, '-db', database_path, '-evalue', str(e_value), '-out', output+'.tsv', '-outfmt', outfmt], stderr=open(log, 'a+'))
     # Include headers in output .tsv file
     first_line = outfmt[2:].replace(" ", "\t")
     blast = open(output+'.tsv', 'r')
@@ -55,8 +53,8 @@ def blast_compute(query_fasta, database_path, sequence_type, e_value, cov_thresh
     output_file.write(blast_output)
     output_file.close()
     # Filter output by coverage and identity percentage thresholds
-    if pident_threshold == None: pident_threshold = 0
-    if cov_threshold == None: cov_threshold = 0 
+    if pident_threshold == None: pident_threshold = 0.0
+    if cov_threshold == None: cov_threshold = 0.0
     df = pd.read_csv(output+'.tsv', delimiter='\t')
     filtered_output = df.loc[(df.pident >= pident_threshold) & (df.qcovs >= cov_threshold)]
     filtered_output.to_csv(output+'.tsv', sep='\t', index=False)

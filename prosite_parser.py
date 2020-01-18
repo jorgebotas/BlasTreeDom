@@ -90,27 +90,12 @@ def extract_domains(input_fasta, output_dir, summary=True):
 
 
 def find_domains(blast_output, output_dir, summary=True):
-    """ For each query in blast_output.tsv, extract domains of every sequence in query_sseqs.fasta """
+    """ For each query in blast_output.tsv, extract domains of every sequence in unaligned.fasta """
     df = pd.read_csv(blast_output, delimiter='\t')
     for qid in pd.unique(df.qseqid):
         query_dir = output_dir.rstrip('/')+'/'+qid+'/'
         os.makedirs(query_dir+'domains/', exist_ok=True)
-        sseqs_file = query_dir+'/'+qid+'_sseqs.fasta'
+        sseqs_file = query_dir+'/'+'unaligned.fasta'
         ############### EXTRACT DIRECTLY FROM DF ###############
         extract_domains(sseqs_file, query_dir+'domains/', summary=summary)
     return
-
-
-def main():
-    """ Finds ProSite domains in protein and stores pertaining information """
-    fasta = open("data/PBP1_staphylococcus.fasta", "r")
-    sequence = fasta.read()[64:].strip('\n')
-    # print(dat_parser(sequence))
-    store_domain_info(sequence, "domain_info.txt")
-    # print(doc_parser('PS00001'))
-    # re.findall(r"G[^EDRKHPFYW].{2}[STAGCN][^P]", sequence)
-
-
-
-if __name__ == '__main__':
-    main()

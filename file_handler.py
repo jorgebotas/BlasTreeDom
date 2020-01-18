@@ -63,13 +63,13 @@ def fasta2tsv(fasta_file, output_dir, output_filename, fields=['id', 'seq'], seq
 
 def tsv2fasta(tsv_file, output_dir, separate_dirs=False):
     """ Create FASTA file with subject sequences for each query id in tsv_file (dataframe).
-        FASTA filename(s) in output_dir:  qseqid_sseqs.fasta """
+        FASTA filename(s) in output_dir or query-specific directory:  unaligned.fasta """
     df = pd.read_csv(tsv_file, delimiter='\t')
     for qseqid in pd.unique(df.qseqid):
         if separate_dirs: 
-            filename = output_dir.rstrip('/')+'/{}/{}_sseqs.fasta'.format(qseqid, qseqid)
+            filename = output_dir.rstrip('/')+'/{}/unaligned.fasta'.format(qseqid, qseqid)
             os.makedirs(output_dir.rstrip('/')+'/'+qseqid, exist_ok=True)
-        else: filename = output_dir.rstrip('/')+'/'+qseqid+'_sseqs.fasta' 
+        else: filename = output_dir.rstrip('/')+'/'+'unaligned.fasta' 
         data = df[df.qseqid == qseqid].reset_index(drop=True)
         with open(filename, 'w') as fasta:
             for idx in range(len(data.sseqid)):
@@ -88,7 +88,6 @@ def merge_results(blast_output, genBank_tsv, output_dir, output_filename):
     columns = merged_df.columns.values
     columns = np.delete(columns, np.argwhere(columns=='qseqid'))
     columns = np.append(np.array(['qseqid']), columns)
-    print(columns)
     merged_df = merged_df[columns]
     merged_df.to_csv(output_dir.rstrip('/')+'/'+os.path.basename(output_filename), index=False, sep='\t')
     return

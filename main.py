@@ -25,24 +25,23 @@ def main():
     E_VALUE = '1e-03'
     SEQ_TYPE = 'prot'
 
-    arg_parser = argparse.ArgumentParser(description='BlasTreeDom is a local python package that given input query and subject sequences performs: blast analysis, \
-                                                      aligment of the original sequences, computation of Neighbor-Joining phylogenetic trees using MUSCLE and \
+    arg_parser = argparse.ArgumentParser(description='BlasTreeDom is a local python package that given input query FASTA file(s) and genBank file(s) performs: \
+                                                      extraction of CDS information and protein sequences from input genBank(s), blast analysis (blastp), \
+                                                      aligment of original sequences, computation of Neighbor-Joining phylogenetic trees using MUSCLE and \
                                                       mapping of ProSite protein domains, providing a friendly output through graphication of the results.')
-    # Create mutually exclusive group of positional arguments
-    # Diferent actions will be performed: from only generating tree from alignment to performing the whole script
-    mutually_exclusive = arg_parser.add_mutually_exclusive_group(required=True) # One must be provided
+    mutually_exclusive = arg_parser.add_mutually_exclusive_group(required=True)
     mutually_exclusive.add_argument('-query', type=str, nargs='+', help='FASTA file or directory containing query protein sequences') 
     mutually_exclusive.add_argument('-unaligned', type=str, nargs='+', help='FASTA file containing unaligned protein sequences')
-    mutually_exclusive.add_argument('-ui', action='store_true', help='Trigger friendly user interfase')
+    mutually_exclusive.add_argument('-ui', action='store_true', help='Launch Friendly User Interfase Mode')
     # Create group for inputs containing query file(s)
-    non_aligned = arg_parser.add_mutually_exclusive_group()
-    non_aligned.add_argument('-genBank', type=str, nargs='+', help='genBank file or directory parsed to extract CDS protein sequences')
-    non_aligned.add_argument('-multifasta', type=str, nargs='+', help='FASTA file containing subject protein sequences')
-    non_aligned.add_argument('-database', type=str, help='If database already computed, it can be provided. \
+    sseqs = arg_parser.add_mutually_exclusive_group() # required=True
+    sseqs.add_argument('-genBank', type=str, nargs='+', help='genBank file or directory parsed to extract CDS protein sequences')
+    sseqs.add_argument('-multifasta', type=str, nargs='+', help='FASTA file containing subject protein sequences')
+    arg_parser.add_argument('-database', type=str, help='If database already computed, it can be provided. \
                                                         However, original subject sequences are needed (genBank or multifasta)')
     arg_parser.add_argument('-pident', type=float, help='Identity percentage threshold for blast analysis')
     arg_parser.add_argument('-cov', type=float, help='Coverage (percentage) threshold for blast analysis')
-    arg_parser.add_argument('-e_value', help='E-value threshold for blast analysis')
+    arg_parser.add_argument('-e_value',type=float, help='E-value threshold for blast analysis')
     arg_parser.add_argument('-results_dir', type=str, help='Output directory to store results. Default: "results/"')
     arg_parser.add_argument('-graph', action='store_true', help='Boolean to graph blast and domains analysis outputs')
     args = arg_parser.parse_args()
@@ -52,7 +51,7 @@ def main():
 
     # Running time starts after getting all input parameters
     time0 = time.time()
-    now = str(datetime.now()).rsplit('.', 1)[0].replace(' ', '_').replace('/', '#')
+    now = str(datetime.now()).rsplit('.', 1)[0].replace(' ', '_').replace(':', '.')
 
 
     if args.results_dir: results = args.results_dir
@@ -85,17 +84,23 @@ def main():
         else:
             gb_multifasta_filename = results+'genBank_multifasta.fasta'
 
-        if args.database: database = args.database
-        else: database = results+'database/genBank'
+        if args.database: 
+            database = args.database
+            if not args.genBank and not args.multifasta:
+                print('\nOriginal subject sequences through genBank or FASTA file must be provided\n')
+                exit(1)
+        else: 
+            database = results+'database/genBank'
 
         if args.e_value: e_value = args.e_value
         else: e_value = E_VALUE
 
 
+    print()
     if args.genBank:
         # Generate combined multifasta with all parsed GenBank files
         print("Generating multifasta from GenBank file(s)")
-        gbp.gbs2multifasta(genBanks=args.genBank, sequence_type=SEQ_TYPE, output_dir=results, output_filename=gb_multifasta_filename)
+        gbp.parse_gbs(genBanks=args.genBank, sequence_type=SEQ_TYPE, output_dir=results, output_filename=gb_multifasta_filename)
         toBeContinued = True
     
     if args.multifasta or toBeContinued:
@@ -104,7 +109,7 @@ def main():
         bl.multifasta2database(multifasta=gb_multifasta_filename, sequence_type=SEQ_TYPE, output_dir=results, output_filename=database, log=logfile)
         toBeContinued = True
 
-    if args.database or toBeContinued:
+    if toBeContinued:
         # Perform blastp or blastn for protein or nucleotide sequences respectively
         print("Performing blast analysis...")
         bl.blast_compute(query_fasta=query+'.fasta', database_path=database, sequence_type=SEQ_TYPE, e_value=e_value,
@@ -123,15 +128,16 @@ def main():
 
 
     # Compute NJ tree using MUSCLE
-    print("Computing NJ phylogenetic tree(s)...")
+    print("Computing N-J phylogenetic tree(s)...")
     ms.compute_trees(blast_output=blast_output+'.tsv', output_dir=results, output_filename="NJ.tree", log=logfile)
 
     # Map domains and store them
     print("Extracting ProSite domains...")
     proparse.find_domains(blast_output=blast_output+'.tsv', output_dir=results, summary=True)
 
-    # Merge all data into one tsv file
-    fh.merge_results(blast_output=blast_output+'.tsv', genBank_tsv=results+'_genBank_info.tsv', output_dir=results, output_filename='_merged.tsv')
+    if args.genBank:
+        # Merge blast output and genBank info into one tsv file
+        fh.merge_results(blast_output=blast_output+'.tsv', genBank_tsv=results+'_genBank_info.tsv', output_dir=results, output_filename='_merged.tsv')
 
     if args.graph:
         print("Creating and storing graphs...")
