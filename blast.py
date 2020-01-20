@@ -11,17 +11,24 @@ from subprocess import call, PIPE, Popen
 import file_handler as fh
 
 
-def multifasta2database(multifasta, sequence_type, output_dir, output_filename='subject', log='/dev/null'):
+def multifasta2database(multifasta, sequence_type, output_dir,
+                        output_filename='subject', log='/dev/null'):
     """ Create database from multifasta using makeblastdb """
     # Create directory for database files if it does not already exist
     database_path = output_dir.rstrip('/')+'/database/'
     if not os.path.isdir(database_path): os.mkdir(database_path)
     output = database_path+os.path.basename(output_filename)
-    call(['makeblastdb', '-in', multifasta, '-dbtype', sequence_type, '-out', output], stdout=open(log, 'a+'), stderr=open(log, 'a+')) # -parse_seqids could be added
-    return 
+    call(
+         ['makeblastdb', '-in', multifasta, '-dbtype', sequence_type,
+         '-out', output],
+         stdout=open(log, 'a+'),
+         stderr=open(log, 'a+')
+        ) # -parse_seqids could be added
+    return
 
 
-def save_multifasta(input_file = "blast_output.tsv", output_filename = "blast_output.fasta"):
+def save_multifasta(input_file = "blast_output.tsv",
+                    output_filename = "blast_output.fasta"):
     blast_output = pd.read_csv(input_file, delimiter='\t')
     output_file = open(output_filename, 'w')
     for dummy_idx, hit in blast_output.iterrows():
@@ -31,18 +38,26 @@ def save_multifasta(input_file = "blast_output.tsv", output_filename = "blast_ou
     return
 
 
-def blast_compute(query_fasta, database_path, sequence_type, e_value, cov_threshold=0,  pident_threshold=0,
-                  outfmt='6 qseqid sseqid qcovs qstart qend pident evalue', output_dir=None,
+def blast_compute(query_fasta, database_path, sequence_type, e_value,
+                  cov_threshold=0,  pident_threshold=0,
+                  outfmt='6 qseqid sseqid qcovs qstart qend pident evalue',
+                  output_dir=None,
                   output_filename='blast_output', log='/dev/null'):
-    """ Perform blastp or blastn analysis for protein or nucleotide sequences respectively.
-        Output filtered by query coverage, identity percentage and e-value thresholds """
+    """ Perform blastp or blastn analysis for protein \
+        or nucleotide sequences respectively.
+        Output filtered by query coverage, identity percentage \
+        and e-value thresholds """
     if sequence_type == "prot":
         blast_type = 'blastp'
     elif sequence_type == "nucl":
         blast_type = 'blastn'
     output = output_dir.rstrip('/')+'/'+os.path.basename(output_filename)
 
-    call([blast_type, '-query', query_fasta, '-db', database_path, '-evalue', str(e_value), '-out', output+'.tsv', '-outfmt', outfmt], stderr=open(log, 'a+'))
+    call(
+         [blast_type, '-query', query_fasta, '-db', database_path,
+         '-evalue', str(e_value), '-out', output+'.tsv', '-outfmt', outfmt],
+         stderr=open(log, 'a+')
+        )
     # Include headers in output .tsv file
     first_line = outfmt[2:].replace(" ", "\t")
     blast = open(output+'.tsv', 'r')
@@ -56,24 +71,39 @@ def blast_compute(query_fasta, database_path, sequence_type, e_value, cov_thresh
     if pident_threshold == None: pident_threshold = 0.0
     if cov_threshold == None: cov_threshold = 0.0
     df = pd.read_csv(output+'.tsv', delimiter='\t')
-    filtered_output = df.loc[(df.pident >= pident_threshold) & (df.qcovs >= cov_threshold)]
+    filtered_output = df.loc[(df.pident >= pident_threshold)
+                              & (df.qcovs >= cov_threshold)]
     filtered_output.to_csv(output+'.tsv', sep='\t', index=False)
 
 
-def retrieve_seqs(query_fasta, subject_multifasta, blast_output, output_dir, output_filename, remove_files=False):
-    """ Generate multifasta file with complete hit subject sequences for each query in blast_output file """ 
-    if not os.path.isdir(output_dir): os.mkdir(output_dir) # Create output directory
+def retrieve_seqs(query_fasta, subject_multifasta, blast_output, output_dir,
+                  output_filename, remove_files=False):
+    """ Generate multifasta file with complete hit subject sequences \
+        for each query in blast_output file """
+    if not os.path.isdir(output_dir): os.mkdir(output_dir)
     subject_tsv = os.path.basename(subject_multifasta).rsplit('.', 1)[0]+'.tsv'
     query_tsv = os.path.basename(query_fasta).rsplit('.', 1)[0]+'.tsv'
-    fh.fasta2tsv(fasta_file=query_fasta, output_dir=output_dir, output_filename=query_tsv, fields=['qseqid', 'qseq', 'qseqlen'], seq_length=True)
-    fh.fasta2tsv(fasta_file=subject_multifasta, output_dir=output_dir, output_filename=subject_tsv, fields=['sseqid', 'sseq'])
+    fh.fasta2tsv(
+                 fasta_file=query_fasta,
+                 output_dir=output_dir,
+                 output_filename=query_tsv,
+                 fields=['qseqid', 'qseq', 'qseqlen'],
+                 seq_length=True
+                )
+    fh.fasta2tsv(
+                 fasta_file=subject_multifasta,
+                 output_dir=output_dir,
+                 output_filename=subject_tsv,
+                 fields=['sseqid', 'sseq']
+                )
     blast = pd.read_csv(blast_output, delimiter='\t')
     sseqs = pd.read_csv(output_dir.rstrip('/')+'/'+subject_tsv, delimiter='\t')
     qseqs = pd.read_csv(output_dir.rstrip('/')+'/'+query_tsv, delimiter='\t')
     # Merge dataframes by sseqid
     blast_sseqs = pd.merge(left=blast, right=sseqs, on='sseqid')
     merged = pd.merge(left=blast_sseqs, right=qseqs, on='qseqid')
-    merged.to_csv(output_dir.rstrip('/')+'/'+os.path.basename(output_filename), index=False, sep='\t')
+    merged.to_csv(output_dir.rstrip('/')+'/'+os.path.basename(output_filename),
+                  index=False, sep='\t')
     if remove_files:
         os.remove(output_dir.rstrip('/')+'/'+query_tsv)
         os.remove(output_dir.rstrip('/')+'/'+subject_tsv)
@@ -81,29 +111,32 @@ def retrieve_seqs(query_fasta, subject_multifasta, blast_output, output_dir, out
 
 
 def main():
-    # e-value threshold 
-    E_VALUE = "1e-03" 
+    # e-value threshold
+    E_VALUE = "1e-03"
 
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument('-query', type=str, required=True)
     exclusive = arg_parser.add_mutually_exclusive_group(required=True)
     exclusive.add_argument('-subject', type=str)
     exclusive.add_argument('-database', type=str)
-    arg_parser.add_argument('-sequence_type', choices=['prot', 'nucl'], required=True)
+    arg_parser.add_argument('-sequence_type', choices=['prot', 'nucl'],
+                            required=True)
     arg_parser.add_argument('-pident')
     arg_parser.add_argument('-cov')
     args = arg_parser.parse_args()
 
-    if args.database: 
+    if args.database:
         database = args.database
-    else: 
+    else:
         subject_filename = os.path.basename(args.subject).split(".")[0]
         database = "database/" + str(subject_filename)
         multifasta2database(args.subject, args.sequence_type, subject_filename)
 
-    blast_compute(query_fasta=args.query, database_path=database, sequence_type=args.sequence_type,
-                  e_value=E_VALUE, cov_threshold=args.cov, pident_threshold=args.pident)
-    
+    blast_compute(query_fasta=args.query, database_path=database,
+                  sequence_type=args.sequence_type,
+                  e_value=E_VALUE, cov_threshold=args.cov,
+                  pident_threshold=args.pident)
+
 
 if __name__ == '__main__':
     main()

@@ -1,0 +1,318 @@
+id	name	accession	description	pattern	start	end	midpoint
+WP_012699965.1	TYR_PHOSPHO_SITE_2	PDOC00007	Tyrosine kinase phosphorylation site 2.	[RK].{3}[DE].{2}Y	494	502	498.0
+WP_012699965.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	49	52	50.5
+WP_012699965.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	63	66	64.5
+WP_012699965.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	108	111	109.5
+WP_012699965.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	292	295	293.5
+WP_012699965.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	304	307	305.5
+WP_012699965.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	310	313	311.5
+WP_012699965.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	326	329	327.5
+WP_012699965.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	391	394	392.5
+WP_012699965.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	485	488	486.5
+WP_012699965.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	500	503	501.5
+WP_012699965.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	572	575	573.5
+WP_012699965.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	43	49	46.0
+WP_012699965.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	174	180	177.0
+WP_012699965.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	240	246	243.0
+WP_012699965.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	374	380	377.0
+WP_012699965.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	387	393	390.0
+WP_012699965.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	408	414	411.0
+WP_012699965.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	468	474	471.0
+WP_012699965.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	528	534	531.0
+WP_012699965.1	LEUCINE_ZIPPER	PDOC00029	Leucine zipper pattern.	L.{6}L.{6}L.{6}L	409	431	420.0
+WP_012699965.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	165	169	167.0
+WP_012699965.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	326	330	328.0
+WP_012699965.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	331	335	333.0
+WP_012699965.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	391	395	393.0
+WP_012699965.1	CAMP_PHOSPHO_SITE	PDOC00004	cAMP- and cGMP-dependent protein kinase phosphorylation site.	[RK]{2}.[ST]	487	491	489.0
+WP_012699965.1	ATP_GTP_A	PDOC00017	ATP/GTP-binding site motif A (P-loop).	[AG].{4}GK[ST]	476	484	480.0
+WP_012699965.1	AMIDATION	PDOC00009	Amidation site.	.G[RK][RK]	187	191	189.0
+WP_012699509.1	TYR_PHOSPHO_SITE_2	PDOC00007	Tyrosine kinase phosphorylation site 2.	[RK].{3}[DE].{2}Y	203	211	207.0
+WP_012699509.1	TYR_PHOSPHO_SITE_1	PDOC00007	Tyrosine kinase phosphorylation site 1.	[RK].{2}[DE].{3}Y	188	196	192.0
+WP_012699509.1	TYR_PHOSPHO_SITE_1	PDOC00007	Tyrosine kinase phosphorylation site 1.	[RK].{2}[DE].{3}Y	382	390	386.0
+WP_012699509.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	298	301	299.5
+WP_012699509.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	327	330	328.5
+WP_012699509.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	360	363	361.5
+WP_012699509.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	434	437	435.5
+WP_012699509.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	538	541	539.5
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	75	81	78.0
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	155	161	158.0
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	267	273	270.0
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	277	283	280.0
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	336	342	339.0
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	410	416	413.0
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	423	429	426.0
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	448	454	451.0
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	495	501	498.0
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	527	533	530.0
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	599	605	602.0
+WP_012699509.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	620	626	623.0
+WP_012699509.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	51	55	53.0
+WP_012699509.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	103	107	105.0
+WP_012699509.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	204	208	206.0
+WP_012699509.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	298	302	300.0
+WP_012699509.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	502	506	504.0
+WP_012699509.1	CAMP_PHOSPHO_SITE	PDOC00004	cAMP- and cGMP-dependent protein kinase phosphorylation site.	[RK]{2}.[ST]	431	435	433.0
+WP_012699509.1	ATP_GTP_A	PDOC00017	ATP/GTP-binding site motif A (P-loop).	[AG].{4}GK[ST]	197	205	201.0
+WP_012699509.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	358	362	360.0
+WP_012699509.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	384	388	386.0
+WP_012699509.1	AMIDATION	PDOC00009	Amidation site.	.G[RK][RK]	124	128	126.0
+NP_462396.3	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	45	48	46.5
+NP_462396.3	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	299	302	300.5
+NP_462396.3	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	340	343	341.5
+NP_462396.3	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	346	349	347.5
+NP_462396.3	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	401	404	402.5
+NP_462396.3	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	631	634	632.5
+NP_462396.3	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	729	732	730.5
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	27	33	30.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	107	113	110.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	182	188	185.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	376	382	379.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	385	391	388.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	444	450	447.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	486	492	489.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	527	533	530.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	544	550	547.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	721	727	724.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	741	747	744.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	775	781	778.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	816	822	819.0
+NP_462396.3	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	832	838	835.0
+NP_462396.3	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	45	49	47.0
+NP_462396.3	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	199	203	201.0
+NP_462396.3	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	286	290	288.0
+NP_462396.3	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	336	340	338.0
+NP_462396.3	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	499	503	501.0
+NP_462396.3	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	600	604	602.0
+NP_462396.3	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	640	644	642.0
+NP_462396.3	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	729	733	731.0
+NP_462396.3	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	771	775	773.0
+NP_462396.3	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	824	828	826.0
+NP_462396.3	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	846	850	848.0
+NP_462396.3	CAMP_PHOSPHO_SITE	PDOC00004	cAMP- and cGMP-dependent protein kinase phosphorylation site.	[RK]{2}.[ST]	341	345	343.0
+NP_462396.3	CAMP_PHOSPHO_SITE	PDOC00004	cAMP- and cGMP-dependent protein kinase phosphorylation site.	[RK]{2}.[ST]	403	407	405.0
+NP_462396.3	ATP_GTP_A	PDOC00017	ATP/GTP-binding site motif A (P-loop).	[AG].{4}GK[ST]	187	195	191.0
+NP_462396.3	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	456	460	458.0
+NP_462396.3	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	672	676	674.0
+NP_462396.3	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	728	732	730.0
+NP_460867.1	TYR_PHOSPHO_SITE_2	PDOC00007	Tyrosine kinase phosphorylation site 2.	[RK].{3}[DE].{2}Y	202	210	206.0
+NP_460867.1	TYR_PHOSPHO_SITE_1	PDOC00007	Tyrosine kinase phosphorylation site 1.	[RK].{2}[DE].{3}Y	563	571	567.0
+NP_460867.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	1	4	2.5
+NP_460867.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	46	49	47.5
+NP_460867.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	121	124	122.5
+NP_460867.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	326	329	327.5
+NP_460867.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	358	361	359.5
+NP_460867.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	484	487	485.5
+NP_460867.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	548	551	549.5
+NP_460867.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	150	156	153.0
+NP_460867.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	164	170	167.0
+NP_460867.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	189	195	192.0
+NP_460867.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	263	269	266.0
+NP_460867.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	276	282	279.0
+NP_460867.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	413	419	416.0
+NP_460867.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	422	428	425.0
+NP_460867.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	447	453	450.0
+NP_460867.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	590	596	593.0
+NP_460867.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	1	5	3.0
+NP_460867.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	79	83	81.0
+NP_460867.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	107	111	109.0
+NP_460867.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	134	138	136.0
+NP_460867.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	155	159	157.0
+NP_460867.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	297	301	299.0
+NP_460867.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	412	416	414.0
+NP_460867.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	548	552	550.0
+NP_460867.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	616	620	618.0
+NP_460867.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	77	81	79.0
+NP_460867.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	523	527	525.0
+NP_460867.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	552	556	554.0
+NP_460792.1	TYR_PHOSPHO_SITE_2	PDOC00007	Tyrosine kinase phosphorylation site 2.	[RK].{3}[DE].{2}Y	492	500	496.0
+NP_460792.1	TYR_PHOSPHO_SITE_1	PDOC00007	Tyrosine kinase phosphorylation site 1.	[RK].{2}[DE].{3}Y	332	340	336.0
+NP_460792.1	TYR_PHOSPHO_SITE_1	PDOC00007	Tyrosine kinase phosphorylation site 1.	[RK].{2}[DE].{3}Y	492	500	496.0
+NP_460792.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	53	56	54.5
+NP_460792.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	61	64	62.5
+NP_460792.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	67	70	68.5
+NP_460792.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	157	160	158.5
+NP_460792.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	193	196	194.5
+NP_460792.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	300	303	301.5
+NP_460792.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	371	374	372.5
+NP_460792.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	489	492	490.5
+NP_460792.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	95	101	98.0
+NP_460792.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	183	189	186.0
+NP_460792.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	378	384	381.0
+NP_460792.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	470	476	473.0
+NP_460792.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	509	515	512.0
+NP_460792.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	530	536	533.0
+NP_460792.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	572	578	575.0
+NP_460792.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	4	8	6.0
+NP_460792.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	53	57	55.0
+NP_460792.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	67	71	69.0
+NP_460792.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	115	119	117.0
+NP_460792.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	174	178	176.0
+NP_460792.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	227	231	229.0
+NP_460792.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	234	238	236.0
+NP_460792.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	269	273	271.0
+NP_460792.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	319	323	321.0
+NP_460792.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	400	404	402.0
+NP_460792.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	439	443	441.0
+NP_460792.1	CAMP_PHOSPHO_SITE	PDOC00004	cAMP- and cGMP-dependent protein kinase phosphorylation site.	[RK]{2}.[ST]	1	5	3.0
+NP_460792.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	212	216	214.0
+NP_459632.1	TYR_PHOSPHO_SITE_2	PDOC00007	Tyrosine kinase phosphorylation site 2.	[RK].{3}[DE].{2}Y	206	214	210.0
+NP_459632.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	5	8	6.5
+NP_459632.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	125	128	126.5
+NP_459632.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	301	304	302.5
+NP_459632.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	330	333	331.5
+NP_459632.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	362	365	363.5
+NP_459632.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	32	38	35.0
+NP_459632.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	75	81	78.0
+NP_459632.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	168	174	171.0
+NP_459632.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	267	273	270.0
+NP_459632.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	280	286	283.0
+NP_459632.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	417	423	420.0
+NP_459632.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	426	432	429.0
+NP_459632.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	451	457	454.0
+NP_459632.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	551	557	554.0
+NP_459632.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	594	600	597.0
+NP_459632.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	5	9	7.0
+NP_459632.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	106	110	108.0
+NP_459632.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	221	225	223.0
+NP_459632.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	301	305	303.0
+NP_459632.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	350	354	352.0
+NP_459632.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	382	386	384.0
+NP_459632.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	416	420	418.0
+NP_459632.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	485	489	487.0
+NP_459632.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	81	85	83.0
+NP_459632.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	136	140	138.0
+NP_459632.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	348	352	350.0
+NP_459632.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	378	382	380.0
+NP_459632.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	526	530	528.0
+NP_459632.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	555	559	557.0
+NP_459632.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	615	619	617.0
+NP_459127.1	TYR_PHOSPHO_SITE_2	PDOC00007	Tyrosine kinase phosphorylation site 2.	[RK].{3}[DE].{2}Y	499	507	503.0
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	6	9	7.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	9	12	10.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	20	23	21.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	60	63	61.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	68	71	69.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	74	77	75.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	77	80	78.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	124	127	125.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	164	167	165.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	288	291	289.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	307	310	308.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	462	465	463.5
+NP_459127.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	496	499	497.5
+NP_459127.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	102	108	105.0
+NP_459127.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	190	196	193.0
+NP_459127.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	383	389	386.0
+NP_459127.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	479	485	482.0
+NP_459127.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	516	522	519.0
+NP_459127.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	541	547	544.0
+NP_459127.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	550	556	553.0
+NP_459127.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	104	108	106.0
+NP_459127.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	181	185	183.0
+NP_459127.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	221	225	223.0
+NP_459127.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	234	238	236.0
+NP_459127.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	288	292	290.0
+NP_459127.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	297	301	299.0
+NP_459127.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	407	411	409.0
+NP_459127.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	446	450	448.0
+NP_459127.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	295	299	297.0
+NP_417855.4	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	37	40	38.5
+NP_417855.4	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	291	294	292.5
+NP_417855.4	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	338	341	339.5
+NP_417855.4	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	393	396	394.5
+NP_417855.4	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	623	626	624.5
+NP_417855.4	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	721	724	722.5
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	19	25	22.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	99	105	102.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	174	180	177.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	368	374	371.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	377	383	380.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	436	442	439.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	478	484	481.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	519	525	522.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	536	542	539.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	713	719	716.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	733	739	736.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	767	773	770.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	808	814	811.0
+NP_417855.4	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	824	830	827.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	37	41	39.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	154	158	156.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	191	195	193.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	242	246	244.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	278	282	280.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	328	332	330.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	491	495	493.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	592	596	594.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	721	725	723.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	763	767	765.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	816	820	818.0
+NP_417855.4	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	838	842	840.0
+NP_417855.4	CAMP_PHOSPHO_SITE	PDOC00004	cAMP- and cGMP-dependent protein kinase phosphorylation site.	[RK]{2}.[ST]	395	399	397.0
+NP_417855.4	ATP_GTP_A	PDOC00017	ATP/GTP-binding site motif A (P-loop).	[AG].{4}GK[ST]	179	187	183.0
+NP_417855.4	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	448	452	450.0
+NP_417855.4	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	645	649	647.0
+NP_417855.4	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	720	724	722.0
+NP_415168.1	TYR_PHOSPHO_SITE_2	PDOC00007	Tyrosine kinase phosphorylation site 2.	[RK].{3}[DE].{2}Y	206	214	210.0
+NP_415168.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	5	8	6.5
+NP_415168.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	125	128	126.5
+NP_415168.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	301	304	302.5
+NP_415168.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	330	333	331.5
+NP_415168.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	362	365	363.5
+NP_415168.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	32	38	35.0
+NP_415168.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	75	81	78.0
+NP_415168.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	168	174	171.0
+NP_415168.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	267	273	270.0
+NP_415168.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	280	286	283.0
+NP_415168.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	417	423	420.0
+NP_415168.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	426	432	429.0
+NP_415168.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	451	457	454.0
+NP_415168.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	551	557	554.0
+NP_415168.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	594	600	597.0
+NP_415168.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	5	9	7.0
+NP_415168.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	106	110	108.0
+NP_415168.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	111	115	113.0
+NP_415168.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	221	225	223.0
+NP_415168.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	301	305	303.0
+NP_415168.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	350	354	352.0
+NP_415168.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	382	386	384.0
+NP_415168.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	416	420	418.0
+NP_415168.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	485	489	487.0
+NP_415168.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	81	85	83.0
+NP_415168.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	136	140	138.0
+NP_415168.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	348	352	350.0
+NP_415168.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	378	382	380.0
+NP_415168.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	526	530	528.0
+NP_415168.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	555	559	557.0
+NP_415168.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	615	619	617.0
+NP_414626.1	TYR_PHOSPHO_SITE_2	PDOC00007	Tyrosine kinase phosphorylation site 2.	[RK].{3}[DE].{2}Y	499	507	503.0
+NP_414626.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	6	9	7.5
+NP_414626.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	20	23	21.5
+NP_414626.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	60	63	61.5
+NP_414626.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	68	71	69.5
+NP_414626.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	74	77	75.5
+NP_414626.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	77	80	78.5
+NP_414626.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	124	127	125.5
+NP_414626.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	164	167	165.5
+NP_414626.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	288	291	289.5
+NP_414626.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	307	310	308.5
+NP_414626.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	496	499	497.5
+NP_414626.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	102	108	105.0
+NP_414626.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	190	196	193.0
+NP_414626.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	383	389	386.0
+NP_414626.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	479	485	482.0
+NP_414626.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	516	522	519.0
+NP_414626.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	541	547	544.0
+NP_414626.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	550	556	553.0
+NP_414626.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	104	108	106.0
+NP_414626.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	181	185	183.0
+NP_414626.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	221	225	223.0
+NP_414626.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	234	238	236.0
+NP_414626.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	288	292	290.0
+NP_414626.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	297	301	299.0
+NP_414626.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	407	411	409.0
+NP_414626.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	446	450	448.0
+NP_414626.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	568	572	570.0
+NP_414626.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	284	288	286.0
+NP_414626.1	ASN_GLYCOSYLATION	PDOC00001	N-glycosylation site.	N[^P][ST][^P]	295	299	297.0

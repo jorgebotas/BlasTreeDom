@@ -9,7 +9,8 @@ import numpy as np
 import pandas as pd
 
 
-def dat_parser(sequence, fields=["name", "accession", "description", "pattern"]):
+def dat_parser(sequence,
+               fields=["name", "accession", "description", "pattern"]):
     """ Finds domain hits from prosite.dat in input sequence """
     hits = []
     pattern_replacements = {'-' : '',
@@ -26,11 +27,13 @@ def dat_parser(sequence, fields=["name", "accession", "description", "pattern"])
         records = Prosite.parse(handle)
         for record in records:
             pattern = record.pattern.strip('.')
-            # Transform ProSite patterns to regular expressions readable by re module
+            # Transform ProSite patterns
+            # to regular expressions readable by re module
             for pat, repl in pattern_replacements.items():
                 pattern = pattern.replace(pat, repl)
             if pattern != "" and re.search(pattern, sequence):
-                hits.append([record.name, record.pdoc, record.description, pattern])
+                hits.append([record.name, record.pdoc,
+                             record.description, pattern])
     return hits
 
 
@@ -44,8 +47,11 @@ def doc_parser(accession):
 
 
 
-def store_domain_info(input_sequence, output_filename, fields=['name', 'accession', 'description', 'pattern'], location=False):
-    """ Given an input protein sequence, find ProSite domains and store in output_filename.
+def store_domain_info(input_sequence, output_filename,
+                      fields=['name', 'accession', 'description', 'pattern'],
+                      location=False):
+    """ Given an input protein sequence, \
+        find ProSite domains and store in output_filename.
         Return domains found """
     output_file = open(output_filename, 'w')
     domains = dat_parser(input_sequence, fields=fields)
@@ -55,7 +61,10 @@ def store_domain_info(input_sequence, output_filename, fields=['name', 'accessio
         if location:
             matches = re.finditer(domain[3], input_sequence)
             for match in matches:
-                located_domains.append(domain + [match.start(), match.end(), match.start() + (match.end() - match.start())/2])
+                located_domains.append(domain
+                                       + [match.start(), match.end(),
+                                       match.start()
+                                       + (match.end() - match.start())/2])
         output_file.writelines([str(field)+'\n' for field in domain]+['\n'])
         text = doc_parser(domain[1])
         output_file.write(text + '\n')
@@ -65,16 +74,22 @@ def store_domain_info(input_sequence, output_filename, fields=['name', 'accessio
 
 
 def extract_domains(input_fasta, output_dir, summary=True):
-    """ Given a FASTA file, extract domains of each sequence, store in different files under same directory.
+    """ Given a FASTA file, extract domains of each sequence, \
+        store in different files under same directory.
         Create summary file if requested """
     seqids = []
-    # Store domain info: 'name', 'accession', 'description', 'pattern', 'start', 'end', 'midpoint'
-    columns = ['name', 'accession', 'description', 'pattern', 'start', 'end', 'midpoint']
+    columns = ['name', 'accession', 'description',
+               'pattern', 'start', 'end', 'midpoint']
     domains = [ [] for col in columns ]
     with open(input_fasta, 'r') as fasta:
         for title, sequence in SimpleFastaParser(fasta):
             seqid = title.split(None, 1)[0]
-            seq_domains = store_domain_info(input_sequence=sequence, output_filename=output_dir.rstrip('/')+'/'+seqid+'_dominfo.txt', 
+            seq_domains = store_domain_info(
+                                            input_sequence=sequence,
+                                            output_filename=output_dir
+                                                            .rstrip('/')
+                                                            +'/'+seqid
+                                                            +'_dominfo.txt',
                                             fields=columns[:4], location=True)
             for domain in seq_domains:
                 for idx in range(len(domains)):
@@ -90,7 +105,8 @@ def extract_domains(input_fasta, output_dir, summary=True):
 
 
 def find_domains(blast_output, output_dir, summary=True):
-    """ For each query in blast_output.tsv, extract domains of every sequence in unaligned.fasta """
+    """ For each query in blast_output.tsv, \
+        extract domains of every sequence in unaligned.fasta """
     df = pd.read_csv(blast_output, delimiter='\t')
     for qid in pd.unique(df.qseqid):
         query_dir = output_dir.rstrip('/')+'/'+qid+'/'

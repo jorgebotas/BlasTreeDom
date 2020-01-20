@@ -1,0 +1,13 @@
+id	name	accession	description	pattern	start	end	midpoint
+WP_012700096.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	7	10	8.5
+WP_012700096.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	60	63	61.5
+WP_012700096.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	81	84	82.5
+WP_012700096.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	116	119	117.5
+WP_012700096.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	27	33	30.0
+WP_012700096.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	53	59	56.0
+WP_012700096.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	146	152	149.0
+WP_012700096.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	210	216	213.0
+WP_012700096.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	225	231	228.0
+WP_012700096.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	35	39	37.0
+WP_012700096.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	91	95	93.0
+WP_012700096.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	195	199	197.0
