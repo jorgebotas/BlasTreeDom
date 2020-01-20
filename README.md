@@ -5,7 +5,8 @@
 * Parse genBank file(s) CDS protein sequences and info
 * Perform blastp analysis
 * Compute Neighbour-Joining phylogenetic tree(s) using MUSCLE
-* Extract ProSite domains of each of the hit sequences from blastp
+* Extract ProSite domains of each of the hit sequences from blastp and present  
+* Graph blastp and ProSite-domain output   
 
 #### Required packages
 * biopython  
@@ -36,7 +37,7 @@ The following installation will be performed using conda from the command line
 ## USAGE  
 
 ### User-friendly  
-After cloning and cd into **_BlasTreeDom_** repository:  
+After cloning and _cd_ into **_BlasTreeDom_** repository:  
 * Run `python main.py -ui` from the command line  
 
 Following steps will be prompted on the Terminal  
@@ -45,22 +46,22 @@ Following steps will be prompted on the Terminal
 Run `python main.py [arguments]`  
   
 As arguments the following will be expected:  
-* A query FASTA file or a directory containing several files:  
-  `-query query.fasta`  
+* Query FASTA file(s) or directory containing several files:  
+  `-query query(.fasta)`  
   
-* Subject sequence againt which to perform the analysis:  
-  - A genBank file or directory containing several files from which to parse the CDS protein sequences  
+* Subject sequence against which to perform the analysis:  
+  - A genBank file or directory containing several files from which to parse the CDS protein sequences and info  
  `-genBank genBank`  
-  - Alternatively a multifasta file  
-  `-multifasta subject.fasta`  
-  
-* If no blast analysis is required, unaligned sequences in a FASTA file can be provided  
-`-unaligned unaligned.fasta`  
+  - Alternatively, provide multifasta file(s)  
+  `-multifasta subject(.fasta)`  
+    - If a database from sequences have already been computed, it can be provided additionally as:  
+      `-database database`
+   
 
 ## Output  
 
 Results will be stored in a directory named by date and time of command execution.  
-Within this directory the following can be found: a _log_ file, database folder, merged query and subject (extracted from genBnak files) FASTA files, and a separate folder for each input query   
+Within this directory the following can be found: a _log_ file, a _database_ folder, merged _query_ and _subject_ FASTA files, _blast_ and _merged_ output files, and a separate folder for each input query   
 
 ### blast  
 
@@ -79,11 +80,10 @@ Within this directory the following can be found: a _log_ file, database folder,
 
 * A tsv file containing information on: sequence accession number (id) and name, accession, description, pattern, start and end location of found ProSite domains  
 * A txt file for each query and hit sequence containing the domains information plus additional text parsed from prosite.doc  
-* Graphical representation for each protein sequence:  
+* Graphical representation of found domains for each protein sequence:  
 
 ![](images/domains_amplified.png)  
 
 ### Merged results  
 
-* A tsv file containing blast_output, genBank parsed fields and \
-extracted ProSite domain names to create an integrated ouput file
+* A tsv file containing _blast_output_, genBank parsed fields and extracted ProSite domain names to create an integrated ouput file
