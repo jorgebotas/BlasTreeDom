@@ -1,8 +1,0 @@
-id	name	accession	description	pattern	start	end	midpoint
-WP_012700615.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	4	7	5.5
-WP_012700615.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	27	30	28.5
-WP_012700615.1	PKC_PHOSPHO_SITE	PDOC00005	Protein kinase C phosphorylation site.	[ST].[RK]	47	50	48.5
-WP_012700615.1	MYRISTYL	PDOC00008	N-myristoylation site.	G[^EDRKHPFYW].{2}[STAGCN][^P]	3	9	6.0
-WP_012700615.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	32	36	34.0
-WP_012700615.1	CK2_PHOSPHO_SITE	PDOC00006	Casein kinase II phosphorylation site.	[ST].{2}[DE]	57	61	59.0
-WP_012700615.1	CAMP_PHOSPHO_SITE	PDOC00004	cAMP- and cGMP-dependent protein kinase phosphorylation site.	[RK]{2}.[ST]	29	33	31.0
