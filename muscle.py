@@ -16,7 +16,7 @@ def multiple_alignment(multifasta, query=None, output_filename="alignment.fasta"
         with open(multifasta, 'a+') as multifasta_file:
             multifasta_file.write('>'+query[0]+'\n')
             multifasta_file.write(query[1]+'\n')
-    call(['muscle', '-in', multifasta, '-out', output_filename, '-verbose', '-loga', '/dev/null'], stderr=open(log, 'a+'))
+    call(['muscle', '-in', multifasta, '-out', output_filename, '-verbose', '-loga', log], stderr=open(log, 'a+'))
     return
 
 
@@ -31,13 +31,13 @@ def compute_alignments(blast_output, output_dir):
     return
 
 
-def compute_NJtree(alignment, output_filename="NJ.tree", log='/dev/null'):
+def compute_NJtree(alignment, output_filename="NJ.phy", log='/dev/null'):
     """ Compute Neighbor-Joining tree using MUSCLE """
     call(['muscle', '-maketree', '-in', alignment, '-out', output_filename, '-quiet', '-loga', log, '-cluster', 'neighborjoining'], stderr=open(log, 'a+'))
     return 
 
 
-def compute_trees(blast_output, output_dir, output_filename="NJ.tree", log='/dev/null'):
+def compute_trees(blast_output, output_dir, output_filename="NJ.phy", log='/dev/null'):
     """ Compute Neighbor-Joining tree for each query in blast_output.tsv """
     df = pd.read_csv(blast_output, delimiter='\t')
     for idx in range(len(df.qseqid)):

@@ -22,8 +22,8 @@ def gb_parser(genBank, sequence_type, output_dir=None, output_file = None, parse
             seq = record.seq # DNA sequence
             record_name = record.name
             for feature in record.features:
-                start = feature.location.start # Start position 
-                end = feature.location.end # End position
+                start = feature.location.start # Start position in genomic sequence
+                end = feature.location.end # End position in genomic sequence
                 strand = feature.location.strand # Positive or negative strand 
                 if feature.type == 'CDS':
                     try:
@@ -86,47 +86,3 @@ def parse_gbs(genBanks, sequence_type, output_dir, output_filename):
     with open(output, "w") as  output_file:
         output_file.write(genBank_multifasta)
     return
-
-
-# def field_parser(input_gb, fields = ['locus_tag', 'gene', 'protein_id', 'EC_number', 'product', 'db_xref'], output_file=None):
-#     """ Generate tsv file containing input fields from CDS in input genbank file """
-#     if not output_file:
-#         output_file = str(os.path.basename(input_gb)) + "_fields.tsv"
-#     tsv_file = open(output_file, 'w')
-#     tsv_writer = csv.writer(tsv_file, delimiter = '\t')
-#     if fields:
-#         tsv_writer.writerow(fields)
-#     with open(input_gb, "r") as input_handle:
-#         for record in SeqIO.parse(input_handle, "genbank"):
-#             for feature in record.features:
-#                 if feature.type == 'CDS':
-#                     data = []
-#                     if not fields:
-#                         fields = feature.qualifiers.keys()
-#                     for field in fields:
-#                         try:
-#                             value = str(feature.qualifiers[field])
-#                             for char in "[]'":
-#                                 value = value.strip(char)
-#                             data.append(value)
-#                         except:
-#                             data.append("NA")
-#                     tsv_writer.writerow(data)
-#     return
-
-
-# def main():
-#     input_gb = sys.argv[1]
-#     gb_basename = os.path.basename(input_gb)
-#     # sequence_type = sys.argv[2]
-#     # genBank2multifasta(input_gb, sequence_type)
-
-#     # Default fields to parse
-#     fields = ['locus_tag', 'gene', 'protein_id', 'EC_number', 'product', 'db_xref']
-#     field_parser(input_gb, fields, str(gb_basename) + "_fields.tsv")
-
-#     sys.exit()
-
-
-# if __name__ == '__main__':
-#     main()

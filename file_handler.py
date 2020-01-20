@@ -78,16 +78,28 @@ def tsv2fasta(tsv_file, output_dir, separate_dirs=False):
     return
 
 
-def merge_results(blast_output, genBank_tsv, output_dir, output_filename):
-    """ Merge blast_output and genBank parsed fields to create an integrated ouput file """
+def merge_results(blast_output, genBank_tsv, output_dir, output_filename, include_gb=False):
+    """ Merge blast_output, genBank parsed fields and extracted ProSite domain names to create an integrated ouput file """
     blast = pd.read_csv(output_dir.rstrip('/')+'/'+os.path.basename(blast_output), delimiter='\t').drop(columns=['qseqlen'])
-    fields0 = ['protein_id', 'gene', 'locus_tag', 'EC_number', 'product', 'db_xref']
-    fields = ['sseqid', 'gene', 'locus_tag', 'EC_number', 'product', 'db_xref']
-    genBank = pd.read_csv(output_dir.rstrip('/')+'/'+os.path.basename(genBank_tsv), delimiter='\t').rename(columns=dict(zip(fields0, fields)))
-    merged_df = pd.merge(left=genBank, right=blast, on='sseqid')
-    columns = merged_df.columns.values
-    columns = np.delete(columns, np.argwhere(columns=='qseqid'))
-    columns = np.append(np.array(['qseqid']), columns)
-    merged_df = merged_df[columns]
+    domains = []
+    for qid in pd.unique(blast.qseqid):
+        data = blast[blast.qseqid == qid]
+        domain_file = pd.read_csv(output_dir.rstrip('/')+'/'+qid+'/'+'domains/_domains.tsv', delimiter='\t')
+        for sseqid in pd.unique(data.sseqid):
+            domains.append(str(pd.unique(domain_file[domain_file.id == sseqid].name)).lstrip('[').rstrip(']'))
+    blast.insert(loc=7, column='domains',value=pd.Series(domains, name='domains'), allow_duplicates=True)
+    if include_gb:
+        fields0 = ['protein_id', 'gene', 'locus_tag', 'EC_number', 'product', 'db_xref']
+        fields = ['sseqid', 'gene', 'locus_tag', 'EC_number', 'product', 'db_xref']
+        genBank = pd.read_csv(output_dir.rstrip('/')+'/'+os.path.basename(genBank_tsv), delimiter='\t').rename(columns=dict(zip(fields0, fields)))
+        merged_df = pd.merge(left=genBank, right=blast, on='sseqid')
+        columns = merged_df.columns.values
+        columns = np.delete(columns, np.argwhere(columns=='qseqid'))
+        columns = np.append(np.array(['qseqid']), columns)
+        merged_df = merged_df[columns]
+        merged_df.to_csv(output_dir.rstrip('/')+'/'+os.path.basename(output_filename), index=False, sep='\t')
+    else:
+        merged_df = blast
+    merged_df = merged_df.sort_values(by=['qseqid', 'qcovs', 'pident'], ascending=[1, 0, 0])
     merged_df.to_csv(output_dir.rstrip('/')+'/'+os.path.basename(output_filename), index=False, sep='\t')
     return

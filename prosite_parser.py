@@ -12,25 +12,25 @@ import pandas as pd
 def dat_parser(sequence, fields=["name", "accession", "description", "pattern"]):
     """ Finds domain hits from prosite.dat in input sequence """
     hits = []
+    pattern_replacements = {'-' : '',
+                        '{' : '[^', # {X} = [^X]
+                        '}' : ']',
+                        '(' : '{', # (from, to) = {from, to}
+                        ')' : '}',
+                        'X' : '.', # x, X = any (.)
+                        'x' : '.',
+                        '<' : '^', # < = N-terminal
+                        '>' : '$' # > = C-terminal
+                        }
     with open("prosite_files/prosite.dat", "r") as handle:
         records = Prosite.parse(handle)
         for record in records:
             pattern = record.pattern.strip('.')
-            pattern_replacements = {'-' : '',
-                                    '{' : '[^', # {X} = [^X]
-                                    '}' : ']',
-                                    '(' : '{', # (from, to) = {from, to}
-                                    ')' : '}',
-                                    'X' : '.', # x, X = any (.)
-                                    'x' : '.',
-                                    '<' : '^', # < = N-terminal
-                                    '>' : '$' # > = C-terminal
-                                    }
             # Transform ProSite patterns to regular expressions readable by re module
             for pat, repl in pattern_replacements.items():
                 pattern = pattern.replace(pat, repl)
             if pattern != "" and re.search(pattern, sequence):
-                hits.append([record.name, record.pdoc, record.description, pattern]) # MODIFY
+                hits.append([record.name, record.pdoc, record.description, pattern])
     return hits
 
 
@@ -62,7 +62,6 @@ def store_domain_info(input_sequence, output_filename, fields=['name', 'accessio
     output_file.close()
     if location: return located_domains
     else: return domains
-    ## Create file containing start and end positions of domain in each of the sequences
 
 
 def extract_domains(input_fasta, output_dir, summary=True):
@@ -85,6 +84,7 @@ def extract_domains(input_fasta, output_dir, summary=True):
     df['id'] = pd.Series(seqids, name='id')
     for idx in range(len(domains)):
         df[columns[idx]] = pd.Series(domains[idx], name=columns[idx])
+    df.sort_values(by=['id', 'name', 'start'], ascending=[0,0,1], inplace=True)
     df.to_csv(output_dir.rstrip('/')+'/'+'_domains.tsv', index=False, sep='\t')
 
 
@@ -96,6 +96,5 @@ def find_domains(blast_output, output_dir, summary=True):
         query_dir = output_dir.rstrip('/')+'/'+qid+'/'
         os.makedirs(query_dir+'domains/', exist_ok=True)
         sseqs_file = query_dir+'/'+'unaligned.fasta'
-        ############### EXTRACT DIRECTLY FROM DF ###############
         extract_domains(sseqs_file, query_dir+'domains/', summary=summary)
     return
