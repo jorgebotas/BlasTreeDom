@@ -2,17 +2,15 @@
 
 
 #### Given query FASTA file(s) and genBank file(s):
-* Parse genBank file(s) CDS protein sequences
+* Parse genBank file(s) CDS protein sequences and info
 * Perform blastp analysis
 * Compute Neighbour-Joining phylogenetic tree(s) using MUSCLE
 * Extract ProSite domains of each of the hit sequences from blastp
 
 #### Required packages
-* biopython
-* blast
-* muscle
-* numpy
-* pandas
+* biopython  
+* blast  
+* muscle  
 
 
 ## Required package installation
@@ -33,12 +31,6 @@ The following installation will be performed using conda from the command line
 #### [muscle](https://anaconda.org/bioconda/muscle)  
 `conda install -c bioconda muscle`  
 `conda install -c bioconda/label/cf201901 muscle`  
-
-#### [numpy](https://anaconda.org/anaconda/numpy)  
-`conda install -c anaconda numpy`  
-
-#### [pandas](https://anaconda.org/anaconda/pandas)  
-`conda install -c anaconda pandas`  
   
   
 ## USAGE  
@@ -89,4 +81,9 @@ Within this directory the following can be found: a _log_ file, database folder,
 * A txt file for each query and hit sequence containing the domains information plus additional text parsed from prosite.doc  
 * Graphical representation for each protein sequence:  
 
-![](images/domains_amplified.png) 
+![](images/domains_amplified.png)  
+
+### Merged results  
+
+* A tsv file containing blast_output, genBank parsed fields and \
+extracted ProSite domain names to create an integrated ouput file
