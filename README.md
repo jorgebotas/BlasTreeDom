@@ -25,13 +25,11 @@ The following installation will be performed using conda from the command line
 
 #### [blast](https://www.ncbi.nlm.nih.gov/books/NBK279671/)  
 * Via [Anaconda](https://anaconda.org/bioconda/blast)  
-  `conda install -c bioconda blast`  
-  `conda install -c bioconda/label/cf201901 blast`  
+  `conda install -c bioconda blast`   
 * Via [NCBI website](https://www.ncbi.nlm.nih.gov/books/NBK279671/)  
 
 #### [muscle](https://anaconda.org/bioconda/muscle)  
 `conda install -c bioconda muscle`  
-`conda install -c bioconda/label/cf201901 muscle`  
   
   
 ## USAGE  
